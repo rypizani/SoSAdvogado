@@ -13,7 +13,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const showAlert = () =>
   Alert.alert(
     "CHAVE PIX",
-    "CHAVE PARA TRANSFERENCIAS PIX: XXXXXXXXXXXXXXXXXXXXXXXXX",
+    "CHAVE PARA TRANSFERENCIAS PIX: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
     [
       {
         text: "Fechar",

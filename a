@@ -1,0 +1,443 @@
+[33mcommit 881f3aa4034d168a49cd1d7a1268d279a6fa3b37[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: rypizani <rypizani@gmail.com>
+Date:   Thu Sep 8 18:45:01 2022 -0300
+
+    Expo + Bugs Icons
+
+[1mdiff --git a/.buckconfig b/.buckconfig[m
+[1mnew file mode 100644[m
+[1mindex 0000000..934256c[m
+[1m--- /dev/null[m
+[1m+++ b/.buckconfig[m
+[36m@@ -0,0 +1,6 @@[m
+[32m+[m
+[32m+[m[32m[android][m
+[32m+[m[32m  target = Google Inc.:Google APIs:23[m
+[32m+[m
+[32m+[m[32m[maven_repositories][m
+[32m+[m[32m  central = https://repo1.maven.org/maven2[m
+[1mdiff --git a/.bundle/config b/.bundle/config[m
+[1mnew file mode 100644[m
+[1mindex 0000000..848943b[m
+[1m--- /dev/null[m
+[1m+++ b/.bundle/config[m
+[36m@@ -0,0 +1,2 @@[m
+[32m+[m[32mBUNDLE_PATH: "vendor/bundle"[m
+[32m+[m[32mBUNDLE_FORCE_RUBY_PLATFORM: 1[m
+[1mdiff --git a/.eslintrc.js b/.eslintrc.js[m
+[1mnew file mode 100644[m
+[1mindex 0000000..40c6dcd[m
+[1m--- /dev/null[m
+[1m+++ b/.eslintrc.js[m
+[36m@@ -0,0 +1,4 @@[m
+[32m+[m[32mmodule.exports = {[m
+[32m+[m[32m  root: true,[m
+[32m+[m[32m  extends: '@react-native-community',[m
+[32m+[m[32m};[m
+[1mdiff --git a/.expo/README.md b/.expo/README.md[m
+[1mnew file mode 100644[m
+[1mindex 0000000..fd146b4[m
+[1m--- /dev/null[m
+[1m+++ b/.expo/README.md[m
+[36m@@ -0,0 +1,15 @@[m
+[32m+[m[32m> Why do I have a folder named ".expo" in my project?[m
+[32m+[m
+[32m+[m[32mThe ".expo" folder is created when an Expo project is started using "expo start" command.[m
+[32m+[m
+[32m+[m[32m> What do the files contain?[m
+[32m+[m
+[32m+[m[32m- "devices.json": contains information about devices that have recently opened this project. This is used to populate the "Development sessions" list in your development builds.[m
+[32m+[m[32m- "packager-info.json": contains port numbers and process PIDs that are used to serve the application to the mobile device/simulator.[m
+[32m+[m[32m- "settings.json": contains the server configuration that is used to serve the application manifest.[m
+[32m+[m
+[32m+[m[32m> Should I commit the ".expo" folder?[m
+[32m+[m
+[32m+[m[32mNo, you should not share the ".expo" folder. It does not contain any information that is relevant for other developers working on the project, it is specific to your machine.[m
+[32m+[m
+[32m+[m[32mUpon project creation, the ".expo" folder is already added to your ".gitignore" file.[m
+[1mdiff --git a/.expo/packager-info.json b/.expo/packager-info.json[m
+[1mnew file mode 100644[m
+[1mindex 0000000..765d447[m
+[1m--- /dev/null[m
+[1m+++ b/.expo/packager-info.json[m
+[36m@@ -0,0 +1,9 @@[m
+[32m+[m[32m{[m
+[32m+[m[32m  "expoServerPort": null,[m
+[32m+[m[32m  "packagerPort": 19000,[m
+[32m+[m[32m  "packagerPid": null,[m
+[32m+[m[32m  "expoServerNgrokUrl": null,[m
+[32m+[m[32m  "packagerNgrokUrl": null,[m
+[32m+[m[32m  "ngrokPid": null,[m
+[32m+[m[32m  "webpackServerPort": null[m
+[32m+[m[32m}[m
+[1mdiff --git a/.expo/settings.json b/.expo/settings.json[m
+[1mnew file mode 100644[m
+[1mindex 0000000..470dc63[m
+[1m--- /dev/null[m
+[1m+++ b/.expo/settings.json[m
+[36m@@ -0,0 +1,10 @@[m
+[32m+[m[32m{[m
+[32m+[m[32m  "hostType": "lan",[m
+[32m+[m[32m  "lanType": "ip",[m
+[32m+[m[32m  "dev": true,[m
+[32m+[m[32m  "minify": false,[m
+[32m+[m[32m  "urlRandomness": null,[m
+[32m+[m[32m  "https": false,[m
+[32m+[m[32m  "scheme": null,[m
+[32m+[m[32m  "devClient": false[m
+[32m+[m[32m}[m
+[1mdiff --git a/.flowconfig b/.flowconfig[m
+[1mnew file mode 100644[m
+[1mindex 0000000..975227d[m
+[1m--- /dev/null[m
+[1m+++ b/.flowconfig[m
+[36m@@ -0,0 +1,67 @@[m
+[32m+[m[32m[ignore][m
+[32m+[m[32m; We fork some components by platform[m
+[32m+[m[32m.*/*[.]android.js[m
+[32m+[m
+[32m+[m[32m; Ignore "BUCK" generated dirs[m
+[32m+[m[32m<PROJECT_ROOT>/\.buckd/[m
+[32m+[m
+[32m+[m[32m; Ignore polyfills[m
+[32m+[m[32mnode_modules/react-native/Libraries/polyfills/.*[m
+[32m+[m
+[32m+[m[32m; Flow doesn't support platforms[m
+[32m+[m[32m.*/Libraries/Utilities/LoadingView.js[m
+[32m+[m
+[32m+[m[32m.*/node_modules/resolve/test/resolver/malformed_package_json/package\.json$[m
+[32m+[m
+[32m+[m[32m[untyped][m
+[32m+[m[32m.*/node_modules/@react-native-community/cli/.*/.*[m
+[32m+[m
+[32m+[m[32m[include][m
+[32m+[m
+[32m+[m[32m[libs][m
+[32m+[m[32mnode_modules/react-native/interface.js[m
+[32m+[m[32mnode_modules/react-native/flow/[m
+[32m+[m
+[32m+[m[32m[options][m
+[32m+[m[32memoji=true[m
+[32m+[m
+[32m+[m[32mexact_by_default=true[m
+[32m+[m
+[32m+[m[32mformat.bracket_spacing=false[m
+[32m+[m
+[32m+[m[32mmodule.file_ext=.js[m
+[32m+[m[32mmodule.file_ext=.json[m
+[32m+[m[32mmodule.file_ext=.ios.js[m
+[32m+[m
+[32m+[m[32mmunge_underscores=true[m
+[32m+[m
+[32m+[m[32mmodule.name_mapper='^react-native/\(.*\)$' -> '<PROJECT_ROOT>/node_modules/react-native/\1'[m
+[32m+[m[32mmodule.name_mapper='^@?[./a-zA-Z0-9$_-]+\.\(bmp\|gif\|jpg\|jpeg\|png\|psd\|svg\|webp\|m4v\|mov\|mp4\|mpeg\|mpg\|webm\|aac\|aiff\|caf\|m4a\|mp3\|wav\|html\|pdf\)$' -> '<PROJECT_ROOT>/node_modules/react-native/Libraries/Image/RelativeImageStub'[m
+[32m+[m
+[32m+[m[32msuppress_type=$FlowIssue[m
+[32m+[m[32msuppress_type=$FlowFixMe[m
+[32m+[m[32msuppress_type=$FlowFixMeProps[m
+[32m+[m[32msuppress_type=$FlowFixMeState[m
+[32m+[m
+[32m+[m[32m[lints][m
+[32m+[m[32msketchy-null-number=warn[m
+[32m+[m[32msketchy-null-mixed=warn[m
+[32m+[m[32msketchy-number=warn[m
+[32m+[m[32muntyped-type-import=warn[m
+[32m+[m[32mnonstrict-import=warn[m
+[32m+[m[32mdeprecated-type=warn[m
+[32m+[m[32munsafe-getters-setters=warn[m
+[32m+[m[32munnecessary-invariant=warn[m
+[32m+[m[32msignature-verification-failure=warn[m
+[32m+[m
+[32m+[m[32m[strict][m
+[32m+[m[32mdeprecated-type[m
+[32m+[m[32mnonstrict-import[m
+[32m+[m[32msketchy-null[m
+[32m+[m[32munclear-type[m
+[32m+[m[32munsafe-getters-setters[m
+[32m+[m[32muntyped-import[m
+[32m+[m[32muntyped-type-import[m
+[32m+[m
+[32m+[m[32m[version][m
+[32m+[m[32m^0.170.0[m
+[1mdiff --git a/.gitignore b/.gitignore[m
+[1mnew file mode 100644[m
+[1mindex 0000000..81570d9[m
+[1m--- /dev/null[m
+[1m+++ b/.gitignore[m
+[36m@@ -0,0 +1,61 @@[m
+[32m+[m[32m# OSX[m
+[32m+[m[32m#[m
+[32m+[m[32m.DS_Store[m
+[32m+[m
+[32m+[m[32m# Xcode[m
+[32m+[m[32m#[m
+[32m+[m[32mbuild/[m
+[32m+[m[32m*.pbxuser[m
+[32m+[m[32m!default.pbxuser[m
+[32m+[m[32m*.mode1v3[m
+[32m+[m[32m!default.mode1v3[m
+[32m+[m[32m*.mode2v3[m
+[32m+[m[32m!default.mode2v3[m
+[32m+[m[32m*.perspectivev3[m
+[32m+[m[32m!default.perspectivev3[m
+[32m+[m[32mxcuserdata[m
+[32m+[m[32m*.xccheckout[m
+[32m+[m[32m*.moved-aside[m
+[32m+[m[32mDerivedData[m
+[32m+[m[32m*.hmap[m
+[32m+[m[32m*.ipa[m
+[32m+[m[32m*.xcuserstate[m
+[32m+[m
+[32m+[m[32m# Android/IntelliJ[m
+[32m+[m[32m#[m
+[32m+[m[32mbuild/[m
+[32m+[m[32m.idea[m
+[32m+[m[32m.gradle[m
+[32m+[m[32mlocal.properties[m
+[32m+[m[32m*.iml[m
+[32m+[m[32m*.hprof[m
+[32m+[m
+[32m+[m[32m# node.js[m
+[32m+[m[32m#[m
+[32m+[m[32mnode_modules/[m
+[32m+[m[32mnpm-debug.log[m
+[32m+[m[32myarn-error.log[m
+[32m+[m
+[32m+[m[32m# BUCK[m
+[32m+[m[32mbuck-out/[m
+[32m+[m[32m\.buckd/[m
+[32m+[m[32m*.keystore[m
+[32m+[m[32m!debug.keystore[m
+[32m+[m
+[32m+[m[32m# fastlane[m
+[32m+[m[32m#[m
+[32m+[m[32m# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the[m
+[32m+[m[32m# screenshots whenever they are needed.[m
+[32m+[m[32m# For more information about the recommended setup visit:[m
+[32m+[m[32m# https://docs.fastlane.tools/best-practices/source-control/[m
+[32m+[m
+[32m+[m[32m*/fastlane/report.xml[m
+[32m+[m[32m*/fastlane/Preview.html[m
+[32m+[m[32m*/fastlane/screenshots[m
+[32m+[m
+[32m+[m[32m# Bundle artifact[m
+[32m+[m[32m*.jsbundle[m
+[32m+[m
+[32m+[m[32m# Ruby / CocoaPods[m
+[32m+[m[32m/ios/Pods/[m
+[32m+[m[32m/vendor/bundle/[m
+[1mdiff --git a/.prettierrc.js b/.prettierrc.js[m
+[1mnew file mode 100644[m
+[1mindex 0000000..2b54074[m
+[1m--- /dev/null[m
+[1m+++ b/.prettierrc.js[m
+[36m@@ -0,0 +1,7 @@[m
+[32m+[m[32mmodule.exports = {[m
+[32m+[m[32m  arrowParens: 'avoid',[m
+[32m+[m[32m  bracketSameLine: true,[m
+[32m+[m[32m  bracketSpacing: false,[m
+[32m+[m[32m  singleQuote: true,[m
+[32m+[m[32m  trailingComma: 'all',[m
+[32m+[m[32m};[m
+[1mdiff --git a/.ruby-version b/.ruby-version[m
+[1mnew file mode 100644[m
+[1mindex 0000000..a4dd9db[m
+[1m--- /dev/null[m
+[1m+++ b/.ruby-version[m
+[36m@@ -0,0 +1 @@[m
+[32m+[m[32m2.7.4[m
+[1mdiff --git a/.watchmanconfig b/.watchmanconfig[m
+[1mnew file mode 100644[m
+[1mindex 0000000..9e26dfe[m
+[1m--- /dev/null[m
+[1m+++ b/.watchmanconfig[m
+[36m@@ -0,0 +1 @@[m
+[32m+[m[32m{}[m
+\ No newline at end of file[m
+[1mdiff --git a/Gemfile b/Gemfile[m
+[1mnew file mode 100644[m
+[1mindex 0000000..2c3edcf[m
+[1m--- /dev/null[m
+[1m+++ b/Gemfile[m
+[36m@@ -0,0 +1,6 @@[m
+[32m+[m[32msource 'https://rubygems.org'[m
+[32m+[m
+[32m+[m[32m# You may use http://rbenv.org/ or https://rvm.io/ to install and use this version[m
+[32m+[m[32mruby '2.7.4'[m
+[32m+[m
+[32m+[m[32mgem 'cocoapods', '~> 1.11', '>= 1.11.2'[m
+[1mdiff --git a/Gemfile.lock b/Gemfile.lock[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e1f9000[m
+[1m--- /dev/null[m
+[1m+++ b/Gemfile.lock[m
+[36m@@ -0,0 +1,100 @@[m
+[32m+[m[32mGEM[m
+[32m+[m[32m  remote: https://rubygems.org/[m
+[32m+[m[32m  specs:[m
+[32m+[m[32m    CFPropertyList (3.0.5)[m
+[32m+[m[32m      rexml[m
+[32m+[m[32m    activesupport (6.1.5.1)[m
+[32m+[m[32m      concurrent-ruby (~> 1.0, >= 1.0.2)[m
+[32m+[m[32m      i18n (>= 1.6, < 2)[m
+[32m+[m[32m      minitest (>= 5.1)[m
+[32m+[m[32m      tzinfo (~> 2.0)[m
+[32m+[m[32m      zeitwerk (~> 2.3)[m
+[32m+[m[32m    addressable (2.8.0)[m
+[32m+[m[32m      public_suffix (>= 2.0.2, < 5.0)[m
+[32m+[m[32m    algoliasearch (1.27.5)[m
+[32m+[m[32m      httpclient (~> 2.8, >= 2.8.3)[m
+[32m+[m[32m      json (>= 1.5.1)[m
+[32m+[m[32m    atomos (0.1.3)[m
+[32m+[m[32m    claide (1.1.0)[m
+[32m+[m[32m    cocoapods (1.11.3)[m
+[32m+[m[32m      addressable (~> 2.8)[m
+[32m+[m[32m      claide (>= 1.0.2, < 2.0)[m
+[32m+[m[32m      cocoapods-core (= 1.11.3)[m
+[32m+[m[32m      cocoapods-deintegrate (>= 1.0.3, < 2.0)[m
+[32m+[m[32m      cocoapods-downloader (>= 1.4.0, < 2.0)[m
+[32m+[m[32m      cocoapods-plugins (>= 1.0.0, < 2.0)[m
+[32m+[m[32m      cocoapods-search (>= 1.0.0, < 2.0)[m
+[32m+[m[32m      cocoapods-trunk (>= 1.4.0, < 2.0)[m
+[32m+[m[32m      cocoapods-try (>= 1.1.0, < 2.0)[m
+[32m+[m[32m      colored2 (~> 3.1)[m
+[32m+[m[32m      escape (~> 0.0.4)[m
+[32m+[m[32m      fourflusher (>= 2.3.0, < 3.0)[m
+[32m+[m[32m      gh_inspector (~> 1.0)[m
+[32m+[m[32m      molinillo (~> 0.8.0)[m
+[32m+[m[32m      nap (~> 1.0)[m
+[32m+[m[32m      ruby-macho (>= 1.0, < 3.0)[m
+[32m+[m[32m      xcodeproj (>= 1.21.0, < 2.0)[m
+[32m+[m[32m    cocoapods-core (1.11.3)[m
+[32m+[m[32m      activesupport (>= 5.0, < 7)[m
+[32m+[m[32m      addressable (~> 2.8)[m
+[32m+[m[32m      algoliasearch (~> 1.0)[m
+[32m+[m[32m      concurrent-ruby (~> 1.1)[m
+[32m+[m[32m      fuzzy_match (~> 2.0.4)[m
+[32m+[m[32m      nap (~> 1.0)[m
+[32m+[m[32m      netrc (~> 0.11)[m
+[32m+[m[32m      public_suffix (~> 4.0)[m
+[32m+[m[32m      typhoeus (~> 1.0)[m
+[32m+[m[32m    cocoapods-deintegrate (1.0.5)[m
+[32m+[m[32m    cocoapods-downloader (1.6.3)[m
+[32m+[m[32m    cocoapods-plugins (1.0.0)[m
+[32m+[m[32m      nap[m
+[32m+[m[32m    cocoapods-search (1.0.1)[m
+[32m+[m[32m    cocoapods-trunk (1.6.0)[m
+[32m+[m[32m      nap (>= 0.8, < 2.0)[m
+[32m+[m[32m      netrc (~> 0.11)[m
+[32m+[m[32m    cocoapods-try (1.2.0)[m
+[32m+[m[32m    colored2 (3.1.2)[m
+[32m+[m[32m    concurrent-ruby (1.1.10)[m
+[32m+[m[32m    escape (0.0.4)[m
+[32m+[m[32m    ethon (0.15.0)[m
+[32m+[m[32m      ffi (>= 1.15.0)[m
+[32m+[m[32m    ffi (1.15.5)[m
+[32m+[m[32m    fourflusher (2.3.1)[m
+[32m+[m[32m    fuzzy_match (2.0.4)[m
+[32m+[m[32m    gh_inspector (1.1.3)[m
+[32m+[m[32m    httpclient (2.8.3)[m
+[32m+[m[32m    i18n (1.10.0)[m
+[32m+[m[32m      concurrent-ruby (~> 1.0)[m
+[32m+[m[32m    json (2.6.1)[m
+[32m+[m[32m    minitest (5.15.0)[m
+[32m+[m[32m    molinillo (0.8.0)[m
+[32m+[m[32m    nanaimo (0.3.0)[m
+[32m+[m[32m    nap (1.1.0)[m
+[32m+[m[32m    netrc (0.11.0)[m
+[32m+[m[32m    public_suffix (4.0.7)[m
+[32m+[m[32m    rexml (3.2.5)[m
+[32m+[m[32m    ruby-macho (2.5.1)[m
+[32m+[m[32m    typhoeus (1.4.0)[m
+[32m+[m[32m      ethon (>= 0.9.0)[m
+[32m+[m[32m    tzinfo (2.0.4)[m
+[32m+[m[32m      concurrent-ruby (~> 1.0)[m
+[32m+[m[32m    xcodeproj (1.21.0)[m
+[32m+[m[32m      CFPropertyList (>= 2.3.3, < 4.0)[m
+[32m+[m[32m      atomos (~> 0.1.3)[m
+[32m+[m[32m      claide (>= 1.0.2, < 2.0)[m
+[32m+[m[32m      colored2 (~> 3.1)[m
+[32m+[m[32m      nanaimo (~> 0.3.0)[m
+[32m+[m[32m      rexml (~> 3.2.4)[m
+[32m+[m[32m    zeitwerk (2.5.4)[m
+[32m+[m
+[32m+[m[32mPLATFORMS[m
+[32m+[m[32m  ruby[m
+[32m+[m
+[32m+[m[32mDEPENDENCIES[m
+[32m+[m[32m  cocoapods (~> 1.11, >= 1.11.2)[m
+[32m+[m
+[32m+[m[32mRUBY VERSION[m
+[32m+[m[32m   ruby 2.7.4p191[m
+[32m+[m
+[32m+[m[32mBUNDLED WITH[m
+[32m+[m[32m   2.2.27[m
+[1mdiff --git a/__tests__/App-test.js b/__tests__/App-test.js[m
+[1mnew file mode 100644[m
+[1mindex 0000000..1784766[m
+[1m--- /dev/null[m
+[1m+++ b/__tests__/App-test.js[m
+[36m@@ -0,0 +1,14 @@[m
+[32m+[m[32m/**[m
+[32m+[m[32m * @format[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32mimport 'react-native';[m
+[32m+[m[32mimport React from 'react';[m
+[32m+[m[32mimport App from '../App';[m
+[32m+[m
+[32m+[m[32m// Note: test renderer must be required after react-native.[m
+[32m+[m[32mimport renderer from 'react-test-renderer';[m
+[32m+[m
+[32m+[m[32mit('renders correctly', () => {[m
+[32m+[m[32m  renderer.create(<App />);[m
+[32m+[m[32m});[m
+[1mdiff --git a/android/app/BUCK b/android/app/BUCK[m
+[1mnew file mode 100644[m
+[1mindex 0000000..76f61bd[m
+[1m--- /dev/null[m
+[1m+++ b/android/app/BUCK[m
+[36m@@ -0,0 +1,55 @@[m
+[32m+[m[32m# To learn about Buck see [Docs](https://buckbuild.com/).[m
+[32m+[m[32m# To run your application with Buck:[m
+[32m+[m[32m# - install Buck[m
+[32m+[m[32m# - `npm start` - to start the packager[m
+[32m+[m[32m# - `cd android`[m
+[32m+[m[32m# - `keytool -genkey -v -keystore keystores/debug.keystore -storepass android -alias androiddebugkey -keypass android -dname "CN=Android Debug,O=Android,C=US"`[m
+[32m+[m[32m# - `./gradlew :app:copyDownloadableDepsToLibs` - make all Gradle compile dependencies available to Buck[m
+[32m+[m[32m# - `buck install -r android/app` - compile, install and run application[m
+[32m+[m[32m#[m
+[32m+[m
+[32m+[m[32mload(":build_defs.bzl", "create_aar_targets", "create_jar_targets")[m
+[32m+[m
+[32m+[m[32mlib_deps = [][m
+[32m+[m
+[32m+[m[32mcreate_aar_targets(glob(["libs/*.aar"]))[m
+[32m+[m
+[32m+[m[32mcreate_jar_targets(glob(["libs/*.jar"]))[m
+[32m+[m
+[32m+[m[32mandroid_library([m
+[32m+[m[32m    name = "all-libs",[m
+[32m+[m[32m    exported_deps = lib_deps,[m
+[32m+[m[32m)[m
+[32m+[m
+[32m+[m[32mandroid_library([m
+[32m+[m[32m    name = "app-code",[m
+[32m+[m[32m    srcs = glob([[m
+[32m+[m[32m        "src/main/java/**/*.java",[m
+[32m+[m[32m    ]),[m
+[32m+[m[32m    deps = [[m
+[32m+[m[32m        ":all-libs",[m
+[32m+[m[32m        ":build_config",[m
+[32m+[m[32m        ":res",[m
+[32m+[m[32m    ],[m
+[32m+[m[32m)[m
+[32m+[m
+[32m+[m[32mandroid_build_config([m
+[32m+[m[32m    name = "build_config",[m
+[32m+[m[32m    package = "com.sosadvogado",[m
+[32m+[m[32m)[m
+[32m+[m
+[32m+[m[32mandroid_resource([m
+[32m+[m[32m    name = "res",[m
+[32m+[m[32m    package = "com.sosadvogado",[m

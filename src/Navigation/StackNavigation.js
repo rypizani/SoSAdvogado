@@ -58,7 +58,7 @@ export function HomeNavigation({navigation}){
     
         return(
             <Stack.Navigator
-             screenOptions= {{ headerShown: true}}>
+             screenOptions= {{ headerShown: false}}>
                          <Stack.Screen name='Home' component={Home}/>
                          <Stack.Screen name='Atendimento' component={Atendimento}/>
                          <Stack.Screen name= 'FormAtendimento' component={FormAtendimento}/>
@@ -75,7 +75,7 @@ export function HomeADNavigation({navigation}){
     
     return(
         <Stack.Navigator
-         screenOptions= {{ headerShown: true}}>
+         screenOptions= {{ headerShown: false}}>
                      <Stack.Screen name='HomeAD' component={HomeAD}/>
 
         </Stack.Navigator>
@@ -87,7 +87,7 @@ export function HomeADNavigation({navigation}){
 export function AtendimentoNavigation({navigation}){
     
     return(
-        <Stack.Navigator screenOptions= {{ headerShown: true}}>
+        <Stack.Navigator screenOptions= {{ headerShown: false}}>
             <Stack.Screen
              name='Atendimento'
             component={Atendimento}
@@ -120,7 +120,7 @@ export function AtendimentoNavigation({navigation}){
 export function AtendimentoADNavigation({navigation}){
     
     return(
-        <Stack.Navigator screenOptions= {{ headerShown: true}}>
+        <Stack.Navigator screenOptions= {{ headerShown: false}}>
             <Stack.Screen
              name='AtendimentoAD'
             component={AtendimentoAD}
@@ -148,7 +148,7 @@ export function AtendimentoADNavigation({navigation}){
 export function ChatNavigation({navigation}){
     
     return(
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions= {{ headerShown: false}}>
             <Stack.Screen 
             name='Chat' 
             component={Chat}
@@ -173,7 +173,7 @@ export function ChatNavigation({navigation}){
 export function PerfilNavigation({navigation}){
     
     return(
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions= {{ headerShown: false}}> 
             <Stack.Screen 
             name='Perfil'
             component={Perfil}
@@ -208,7 +208,7 @@ export function PerfilNavigation({navigation}){
 export function PerfilADNavigation({navigation}){
     
     return(
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions= {{ headerShown: false}}>
             <Stack.Screen 
             name='PerfilAD'
             component={PerfilAD}

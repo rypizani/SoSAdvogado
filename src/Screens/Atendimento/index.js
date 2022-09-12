@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Button, TouchableOpacity} from "react-native";
+import { View, Text, TouchableOpacity} from "react-native";
 import styles from './styles'
 
 export default props => (
@@ -8,15 +8,15 @@ export default props => (
 
             <Text style={styles.text}>Atendimento</Text>
 
-            <TouchableOpacity style={styles.button}>
-            <Text style={styles.text} onPress={() => props.navigation.navigate('FormAtendimento')}>Solicitar Novo Atendimento</Text>
+            <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('FormAtendimento')}>
+            <Text style={styles.text} >Solicitar Novo Atendimento</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.text} onPress={() => props.navigation.navigate('MeusAtendimentos')}>Meus Atendimentos</Text>
+          <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('MeusAtendimentos')}>
+            <Text style={styles.text} >Meus Atendimentos</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.text} onPress={() => props.navigation.navigate('Arquivados')}>Atendimentos Arquivados</Text>
+          <TouchableOpacity style={styles.button}onPress={() => props.navigation.navigate('Arquivados')}>
+            <Text style={styles.text} >Atendimentos Arquivados</Text>
           </TouchableOpacity>
     </View>
 )

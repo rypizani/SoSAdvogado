@@ -198,7 +198,7 @@
   
       },
       input:{
-        backgroundColor:'#FFF',
+        backgroundColor:'#424242',
         width:'90%',
         marginBottom:15,
         color:'#222',

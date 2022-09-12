@@ -8,7 +8,7 @@ import {
   TouchableRipple,
   
 } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 const App = () => {
@@ -111,28 +111,28 @@ const App = () => {
 
       <TouchableRipple onPress={() => {}}>
           <View style={styles.menuItem}>
-          <Icon name="account-group" color="#c9c7c7" size={25}/>
+          <MaterialCommunityIcons  name="account-group" color="#c9c7c7" size={25}/>
           <Text style={styles.menuItemText}>Total= 100</Text>
           </View>
         </TouchableRipple>
 
         <TouchableRipple onPress={() => {}}>
           <View style={styles.menuItem}>
-          <Icon name="account-switch" color="#efbc1c" size={25}/>
+          <MaterialCommunityIcons  name="account-switch" color="#efbc1c" size={25}/>
           <Text style={styles.menuItemText}>Em Andamento= 25</Text>
           </View>
         </TouchableRipple>
 
         <TouchableRipple onPress={() => {}}>
           <View style={styles.menuItem}>
-          <Icon name="account-multiple-check" color="#62a744" size={25}/>
+          <MaterialCommunityIcons  name="account-multiple-check" color="#62a744" size={25}/>
           <Text style={styles.menuItemText}>Concluidos= 50</Text>
           </View>
         </TouchableRipple>
 
         <TouchableRipple onPress={() => {}}>
           <View style={styles.menuItem}>
-          <Icon name="account-multiple-remove" color="#F05454" size={25}/>
+          <MaterialCommunityIcons  name="account-multiple-remove" color="#F05454" size={25}/>
           <Text style={styles.menuItemText}>Recusados= 25</Text>
           </View>
         </TouchableRipple>

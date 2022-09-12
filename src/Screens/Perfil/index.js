@@ -8,7 +8,9 @@ import {
   TouchableRipple,
   
 } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
+
 
 
 const Perfil = (props) => {
@@ -37,15 +39,15 @@ const Perfil = (props) => {
 
       <View style={styles.userInfoSection}>
         <View style={styles.row}>
-        <Icon name="map-marker-radius" color="#efbc1c" size={20}/>
+        <MaterialCommunityIcons name="map-marker-radius" color="#efbc1c" size={20}/>
         <Text style={{color:"#c9c7c7", marginLeft: 20}}>Cidade, Pais</Text>
         </View>
         <View style={styles.row}>
-        <Icon name="phone" color="#efbc1c" size={20}/>
+        <MaterialCommunityIcons name="phone" color="#efbc1c" size={20}/>
         <Text style={{color:"#c9c7c7", marginLeft: 20}}>+55 (00) 9000-0009</Text>
         </View>
         <View style={styles.row}>
-        <Icon name="email" color="#efbc1c"  size={20}/>
+        <MaterialCommunityIcons name="email" color="#efbc1c"  size={20}/>
           <Text style={{color:"#c9c7c7", marginLeft: 20}}>usuario@email.com</Text>
         </View>
       </View>
@@ -69,31 +71,31 @@ const Perfil = (props) => {
       <View style={styles.menuWrapper}>
       <TouchableRipple onPress={() => {}}>
           <View style={styles.menuItem}>
-          <Icon name="account-edit" color="#efbc1c" size={25}/>
+          <MaterialCommunityIcons name="account-edit" color="#efbc1c" size={25}/>
          <Text style={styles.menuItemText}>Alterar Dados</Text>
           </View>
         </TouchableRipple>
         <TouchableRipple onPress={() => props.navigation.navigate('Pagamentos')}>
           <View style={styles.menuItem}>
-          <Icon name="credit-card" color="#efbc1c" size={25}/>
+          <MaterialCommunityIcons name="credit-card" color="#efbc1c" size={25}/>
           <Text style={styles.menuItemText}>Pagamentos e Planos</Text>
           </View>
         </TouchableRipple>
         <TouchableRipple onPress={() => props.navigation.navigate('Suporte')}>
           <View style={styles.menuItem}>
-          <Icon name="account-check-outline" color="#efbc1c" size={25}/>
+          <MaterialCommunityIcons name="account-check-outline" color="#efbc1c" size={25}/>
          <Text style={styles.menuItemText}>Suporte</Text>
           </View>
         </TouchableRipple>
         <TouchableRipple onPress={() => {}}>
           <View style={styles.menuItem}>
-          <Icon name="cog" color="#efbc1c" size={25}/>
+          <MaterialCommunityIcons name="cog" color="#efbc1c" size={25}/>
           <Text style={styles.menuItemText}>Configurações</Text>
           </View>
         </TouchableRipple>
         <TouchableRipple onPress={() => props.navigation.navigate('Login')}>
           <View style={styles.menuItem}>
-          <Icon name="exit-to-app" color="#efbc1c" size={25}/>
+          <MaterialCommunityIcons name="exit-to-app" color="#efbc1c" size={25}/>
           <Text style={styles.menuItemText}>Deslogar</Text>
           </View>
         </TouchableRipple>

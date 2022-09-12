@@ -2,8 +2,7 @@ import React from "react";
 //import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Text } from "react-native";
-import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
-
+import { FontAwesome5 } from '@expo/vector-icons'; 
 
 import { 
     HomeADNavigation,
@@ -35,7 +34,7 @@ export default function HomeADNavigationTabs() {
                options={{
                tabBarIcon: ({focused }) => (
                <>
-                  <FontAwesome5Icon
+                  <FontAwesome5
                   name='home'
                    size={20}
                    color = {focused? '#d7e222' : '#000'}
@@ -47,7 +46,7 @@ export default function HomeADNavigationTabs() {
                       fontSize: 11,
                       textAlign:'center'
                      }}
-                     >HomeAD</Text>
+                     >Home</Text>
                </>  
               ),
             }}
@@ -58,7 +57,7 @@ export default function HomeADNavigationTabs() {
               options={{
                 tabBarIcon: ({focused }) => (
                 <>
-                   <FontAwesome5Icon
+                   <FontAwesome5
                    name='stream'
                     size={20}
                     color = {focused? '#d7e222' : '#000'}
@@ -70,7 +69,7 @@ export default function HomeADNavigationTabs() {
                       fontSize: 11,
                       textAlign:'center'
                      }}
-                     >AtendimentoAD</Text>
+                     >Atendimento</Text>
                 </>
                ),
              }}/>
@@ -102,7 +101,7 @@ export default function HomeADNavigationTabs() {
              options={{
               tabBarIcon: ({focused }) => (
               <>
-                 <FontAwesome5Icon
+                 <FontAwesome5
                  name='user'
                   size={20}
                   color = {focused? '#d7e222' : '#000'}
@@ -114,7 +113,7 @@ export default function HomeADNavigationTabs() {
                       fontSize: 11,
                       textAlign:'center'
                      }}
-                     >PerfilAD</Text>
+                     >Perfi</Text>
               </>
              ),
            }}/>

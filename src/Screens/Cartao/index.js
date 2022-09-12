@@ -8,7 +8,7 @@ import {
   TouchableRipple,
   
 } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 const Cartao = (props) => {
@@ -40,7 +40,7 @@ const Cartao = (props) => {
         </TouchableRipple>
         <TouchableRipple onPress={() => {}}>
           <View style={styles.menuItem}>
-          <Icon name="credit-card-plus" color="#efbc1c" size={25}/>
+          <MaterialCommunityIcons name="credit-card-plus" color="#efbc1c" size={25}/>
           <Text style={styles.menuItemText}>Adicionar novo Cartão</Text>
           </View>
         </TouchableRipple>

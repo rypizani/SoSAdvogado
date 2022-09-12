@@ -1,8 +1,10 @@
 import React from 'react'; 
 import { SafeAreaView, View, ScrollView, StyleSheet } from 'react-native'; 
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-const LeftContent = () => <Avatar.Icon size={50} icon="account-circle" backgroundColor="#fff" color="#000" />
+
+const LeftContent = () => <MaterialCommunityIcons name="account-circle" size={24} color="black" />
 
 const App = (props) => { 
   return ( 

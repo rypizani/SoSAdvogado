@@ -8,7 +8,7 @@ import {
   TouchableRipple,
   
 } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 const Pagamentos = (props) => {
@@ -74,29 +74,29 @@ const Pagamentos = (props) => {
 
       <View style={styles.menuWrapper}>
           <View style={styles.menuItem}>
-          <Icon name="cash" color="#efbc1c" size={25}/>
+          <MaterialCommunityIcons name="cash" color="#efbc1c" size={25}/>
          <Text style={styles.menuItemText}>Forma de Pagamento Atual:</Text>
 
           </View>
         <TouchableRipple onPress={() => props.navigation.navigate('FormaPagamento')}>
           <View style={styles.menuItem}>
-          <Icon name="credit-card-edit" color="#efbc1c" size={25}/>
+          <MaterialCommunityIcons name="credit-card-edit" color="#efbc1c" size={25}/>
           <Text style={styles.menuItemText}>Alterar Forma de Pagamento</Text>
           </View>
         </TouchableRipple>
           <View style={styles.menuItem}>
-          <Icon name="briefcase" color="#efbc1c" size={25}/>
+          <MaterialCommunityIcons name="briefcase" color="#efbc1c" size={25}/>
          <Text style={styles.menuItemText}>Plano Atual: Premium</Text>
           </View>
         <TouchableRipple onPress={() => {}}>
           <View style={styles.menuItem}>
-          <Icon name="briefcase-edit" color="#efbc1c" size={25}/>
+          <MaterialCommunityIcons name="briefcase-edit" color="#efbc1c" size={25}/>
           <Text style={styles.menuItemText}>Alterar Plano</Text>
           </View>
         </TouchableRipple>
         <TouchableRipple onPress={showAlert}>
           <View style={styles.menuItem}>
-          <Icon name="briefcase-remove" color="#efbc1c" size={25}/>
+          <MaterialCommunityIcons name="briefcase-remove" color="#efbc1c" size={25}/>
           <Text style={styles.menuItemText}>Solicitar Cancelamento</Text>
           </View>
         </TouchableRipple>

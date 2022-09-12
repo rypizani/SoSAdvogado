@@ -1,8 +1,10 @@
 import React from 'react'; 
 import { SafeAreaView, View, ScrollView, StyleSheet } from 'react-native'; 
-import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+import { Avatar, Button, Card, Title, Paragraph, TouchableRipple, Text } from 'react-native-paper';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-const LeftContent = () => <Avatar.Icon size={50} icon="account-circle" backgroundColor="#fff" color="#000" />
+
+const LeftContent = () => <MaterialCommunityIcons name="account-circle" size={24} color="black" />
 
 const App = (props) => { 
   return ( 
@@ -16,16 +18,34 @@ const App = (props) => {
               <Paragraph>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </Paragraph>
             </Card.Content>
             <Card.Actions>
-              <Button icon="chat" color="#000" onPress={() => props.navigation.navigate('ChatAD')}>
-                Chat
-              </Button>
-              <Button icon="file-document"  color="#000" onPress={() => alert('Documentos')}>
-                Documentos
-              </Button>
-              <Button icon="archive"  color="#000" onPress={() => alert('Arquivar')}>
-                Arquivar
-              </Button>
-            </Card.Actions>
+
+
+
+<TouchableRipple onPress={() => props.navigation.navigate('ChatAD')}>
+<View style={styles.menuItem}>
+<MaterialCommunityIcons name="chat" color="#000" size={20}/>
+<Text style={styles.menuItemText}>Chat</Text>
+</View>
+</TouchableRipple>
+
+
+<TouchableRipple onPress={() => alert('Documentos')}>
+<View style={styles.menuItem}>
+<MaterialCommunityIcons name="file-document" color="#000" size={20}/>
+<Text style={styles.menuItemText}>Documentos</Text>
+</View>
+</TouchableRipple>
+
+
+<TouchableRipple onPress={() => alert('Arquivar')}>
+<View style={styles.menuItem}>
+<MaterialCommunityIcons name="archive" color="#000" size={20}/>
+<Text style={styles.menuItemText}>Arquivar</Text>
+</View>
+</TouchableRipple>
+
+
+  </Card.Actions>
           </Card>             
         </View> 
       </ScrollView> 
@@ -39,6 +59,18 @@ const styles = StyleSheet.create({
     paddingTop: 10, 
     backgroundColor: '#191919', 
   }, 
+  menuItem: {
+    flexDirection: 'row',
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+  },
+  menuItemText: {
+    color: '#c9c7c7',
+    marginLeft: 5,
+    fontWeight: '600',
+    fontSize: 15,
+  },
+  
 });
 
 export default App;

@@ -10,8 +10,8 @@ export default props => (
   
 
           
-          <TouchableOpacity style={Styles.btnAcessar}>
-            <Text style={Styles.btnTextoAcessar} onPress={ () => props.navigation.navigate('Atendimento')}>Procurar Advogado</Text>
+          <TouchableOpacity style={Styles.btnAcessar} onPress={ () => props.navigation.navigate('Atendimento')}>
+            <Text style={Styles.btnTextoAcessar} >Procurar Advogado</Text>
           </TouchableOpacity>
 
     </View>

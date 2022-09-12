@@ -8,8 +8,7 @@ import {
   TouchableRipple,
   
 } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const FormaPagamento = (props) => {
 
@@ -76,21 +75,22 @@ const FormaPagamento = (props) => {
 
       <View style={styles.menuWrapper}>
       <TouchableRipple onPress={showAlert}>
-        
+      
+
           <View style={styles.menuItem}>
-          <Icon name="barcode" color="#efbc1c" size={25}/>
+          <MaterialCommunityIcons name="barcode" color="#efbc1c" size={25}/>
          <Text style={styles.menuItemText}>Boleto</Text>
           </View>
         </TouchableRipple>
         <TouchableRipple onPress={() => props.navigation.navigate('Cartao')}>
           <View style={styles.menuItem}>
-          <Icon name="credit-card" color="#efbc1c" size={25}/>
+          <MaterialCommunityIcons name="credit-card" color="#efbc1c" size={25}/>
           <Text style={styles.menuItemText}>Cartão de credito</Text>
           </View>
         </TouchableRipple>
         <TouchableRipple onPress={() => props.navigation.navigate('Pix')}>
           <View style={styles.menuItem}>
-          <Icon name="gamepad-circle-outline" color="#efbc1c" size={25}/>
+          <MaterialCommunityIcons name="gamepad-circle-outline" color="#efbc1c" size={25}/>
          <Text style={styles.menuItemText}>Pix</Text>
           </View>
         </TouchableRipple>

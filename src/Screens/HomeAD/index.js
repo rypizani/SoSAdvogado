@@ -39,7 +39,7 @@ const App = () => {
     <View style={styles.container}>
       <View style={{marginLeft: 20}}>
             <Title style={[styles.title, {
-              marginTop:15,
+              marginTop:30,
               marginBottom: 5,
             }]}>Dashboard</Title>
             <Caption style={styles.caption}>Usuario</Caption>

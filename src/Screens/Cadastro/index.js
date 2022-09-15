@@ -151,8 +151,8 @@ const schema = yup.object({
 
          
             
-          <TouchableOpacity style={styles.btnAcessar}>
-            <Text style={styles.btnTextoAcessar} onPress={handleSubmit(handleSignIn)}>Concluir</Text>
+          <TouchableOpacity style={styles.btnAcessar} onPress={handleSubmit(handleSignIn)}>
+            <Text style={styles.btnTextoAcessar} >Concluir</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btnCriar}>
             <Text style={styles.btnTextoCriar}

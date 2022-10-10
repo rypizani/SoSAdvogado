@@ -39,17 +39,9 @@ const Stack = createNativeStackNavigator()
 
 
 export default props => (
-    <Stack.Navigator
-    initialRouteName="Login"
-    screenOptions={{ headerShown:false }}>
-        <Stack.Screen name='Login' component={Login}/>
-        <Stack.Screen name='LoginAD' component={LoginAD}/>
-        <Stack.Screen name='Cadastro' component={Cadastro}/>
+    <Stack.Navigator>
         <Stack.Screen name='Home' component={HomeNavigationTabs}/>
         <Stack.Screen name='HomeAD' component={HomeADNavigationTabs}/>
-
-
-
     </Stack.Navigator>
 )
 
@@ -95,12 +87,6 @@ export function AtendimentoNavigation({navigation}){
                     title: 'AtendimentosAD',
                    headerLeft:() => (
                 <View style= {{margin: 10}}>
-                   {/* <FontAwesome5Icon
-                       name='bars'
-                       size={25}
-                       color={'#000'}
-                       onPress={()=> navigation.openDrawer()}
-                   /> */}
                </View>
            )
          }}

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState, useContext} from 'react';
+
 import {View, SafeAreaView, StyleSheet} from 'react-native';
 import {
   Avatar,
@@ -11,10 +12,12 @@ import {
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
-
+import {AuthContext} from '../../contexts/auth'
 
 const Perfil = (props) => {
 
+
+  const {user, deslogar} = useContext(AuthContext)
 
   return (
     <SafeAreaView style={styles.container}>
@@ -31,7 +34,7 @@ const Perfil = (props) => {
             <Title style={[styles.title, {
               marginTop:15,
               marginBottom: 5,
-            }]}>Usuario</Title>
+            }]}>{user && user.nome}</Title>
             <Caption style={styles.caption}>@Usuario</Caption>
           </View>
         </View>
@@ -93,7 +96,7 @@ const Perfil = (props) => {
           <Text style={styles.menuItemText}>Configurações</Text>
           </View>
         </TouchableRipple>
-        <TouchableRipple onPress={() => props.navigation.navigate('Login')}>
+        <TouchableRipple onPress={() => deslogar()}>
           <View style={styles.menuItem}>
           <MaterialCommunityIcons name="exit-to-app" color="#efbc1c" size={25}/>
           <Text style={styles.menuItemText}>Deslogar</Text>

@@ -1,34 +1,39 @@
-import React, {useState, useContext } from 'react';
+import React, {useState, useContext} from 'react';
 import { Platform } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
-import { Background, Container, Logo, AreaInput, Input, SubmitButton, 
-SubmitText, Link, LinkText} from './styles';
 import { AuthContext } from '../../contexts/auth';
 
+import { Background, Container, Logo, AreaInput, Input, SubmitButton, 
+SubmitText} from '../Login/styles';
 
-export default function Login() {
-  const navigation = useNavigation();
-
-
+export default function CadastroAD() {
+  const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  
+  const { CadastrarAD } = useContext(AuthContext);
 
-  const {Logar} = useContext(AuthContext)
-
- function handleLogin(){
-
-    Logar(email, password)
- }
-
+  function handleSignUp(){
+    CadastrarAD (email, password, nome);
+  }
+ 
  return (
    <Background>
       <Container
       behavior={Platform.OS === 'ios' ? 'padding' : ''}
       enabled
       >
-        <Logo source={require('../../../assets/logo.png')}/>
-        
+
+        <AreaInput>
+          <Input
+          placeholder="Nome"
+          autoCorrect={false}
+          autoCapitalize="none"
+          value={nome}
+          onChangeText={ (text) => setNome(text) }
+          />
+        </AreaInput>
+
         <AreaInput>
           <Input
           placeholder="Email"
@@ -49,17 +54,9 @@ export default function Login() {
           />
         </AreaInput>
 
-      <SubmitButton onPress={handleLogin}>
-        <SubmitText>Acessar</SubmitText>
+      <SubmitButton onPress={handleSignUp}>
+        <SubmitText>Cadastrar</SubmitText>
       </SubmitButton>
-
-      <Link onPress={ () => navigation.navigate('Cadastro')}>
-        <LinkText>Criar uma conta!</LinkText>
-      </Link>
-
-      <Link onPress={ () => navigation.navigate('LoginAD')}>
-        <LinkText>Sou Advogado</LinkText>
-      </Link>
 
       </Container>
    </Background>

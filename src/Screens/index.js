@@ -23,7 +23,7 @@ import ArquivadosAD from "./ArquivadosAD"
 import ChatArquivadoAD from "./ChatArquivadoAD"
 import PerfilAD from "./PerfilAD"
 import LoginAD from "./LoginAD"
-
+import CadastroAD from "./CadastroAD"
 
 
 export {
@@ -51,7 +51,9 @@ export {
     ArquivadosAD,
     ChatArquivadoAD,
     PerfilAD,
-    LoginAD
+    LoginAD,
+    CadastroAD
+    
 }
 
 

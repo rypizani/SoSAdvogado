@@ -1,246 +1,67 @@
-import React, {useState, useEffect} from 'react';
-import { 
-      View,
-      KeyboardAvoidingView, 
-      Image,
-      Text,
-      TextInput,
-      TouchableOpacity,
-      StyleSheet,
-      Animated,
-      Keyboard,
-      Button,
-      } from 'react-native';
+import React, {useState, useContext } from 'react';
+import { Platform } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-import {useForm, Controller} from 'react-hook-form';
-import {yupResolver} from '@hookform/resolvers/yup'
-import * as yup from 'yup'
-
-const schema = yup.object({
-    email: yup.string().email("Email Invalido").required("Informe seu email"),
-    password: yup.string().min(6,"A senha  deve ter pelo menos 6 digitos").required("Informe sua senha")
-})
-
-  export default function App ({navigation}){
-
-    const { control, handleSubmit, formState: { errors }} = useForm({
-      resolver: yupResolver(schema)
-     })
+import { Background, Container, Logo, AreaInput, Input, SubmitButton, 
+SubmitText, Link, LinkText} from '../Login/styles';
+import { AuthContext } from '../../contexts/auth';
 
 
-      function handleSignIn(data){ 
-        navigation.navigate('Home');
-
-      }
+export default function LoginAD() {
+  const navigation = useNavigation();
 
 
+  const [emailAD, setEmailAD] = useState('');
+  const [passwordAD, setPasswordAD] = useState('');
 
-      const [offset] = useState(new Animated.ValueXY({x: 0, y: 95}));
-      const [opacity] = useState(new Animated.Value(0));
-      const [logo] = useState(new Animated.ValueXY({x:300, y:200}))
+  const {LogarAD} = useContext(AuthContext)
 
-      useEffect(()=> {
-        KeyboardDidShowListener = Keyboard.addListener('keyboardDidShow', keyboardDidShow)
-        KeyboardDidHideListener = Keyboard.addListener('keyboardDidHide', keyboardDidHide)
+ function handleLogin(){
 
+    LogarAD(emailAD, passwordAD)
+ }
 
-        Animated.parallel([
-          Animated.spring(offset.y, {
-            toValue:0,
-            speed: 1,
-            bounciness: 15,
-            useNativeDriver: false
-          }),  
-          Animated.timing(opacity, {
-            toValue:1,
-            duration:600,
-            useNativeDriver: false
-          })
-          
-        ]).start();
-
-      },[])
-
-      function keyboardDidShow(){
-
-           Animated.parallel([
-            Animated.timing(logo.x, {
-              toValue: 150,
-              duration:100,
-              useNativeDriver: false
-             }),
-              Animated.timing(logo.y, {
-                toValue: 150,
-                duration:100,
-                useNativeDriver: false
-              }),
-          ]).start();
-
-        }
-      function keyboardDidHide(){
-        Animated.parallel([
-          Animated.timing(logo.x, {
-            toValue: 300,
-            duration:100,
-            useNativeDriver: false
-          }),
-            Animated.timing(logo.y, {
-              toValue: 200,
-              duration:100,
-              useNativeDriver: false
-            }),
-        ]).start();
-
-      }
-
-     return(
-      <KeyboardAvoidingView style={styles.backgound}>
-        <View style={styles.containerLogo}>
-          <Animated.Image
-          style={{
-
-
-            width:logo.x,
-            height:logo.y,
-          } }
-          source={require('../../../assets/logo.png')} 
+ return (
+   <Background>
+      <Container
+      behavior={Platform.OS === 'ios' ? 'padding' : ''}
+      enabled
+      >
+        <Logo source={require('../../../assets/logo.png')}/>
+        
+        <AreaInput>
+          <Input
+          placeholder="Email"
+          autoCorrect={false}
+          autoCapitalize="none"
+          value={emailAD}
+          onChangeText={ (text) => setEmailAD(text) }
           />
-        </View>
+        </AreaInput>
 
-        <Animated.View 
-        style={[
-          styles.container,
-          {
-            opacity: opacity,
-              transform: [
-                {translateY: offset.y}
-              ]
-          }
-          ]}>
+        <AreaInput>
+          <Input
+          placeholder="Senha"
+          autoCorrect={false}
+          autoCapitalize="none"
+          value={passwordAD}
+          onChangeText={ (text) => setPasswordAD(text) }
+          />
+        </AreaInput>
 
-            <Controller
-              control={control}
-              name="email"
-              render={({field: {onChange, onBlur, value}}) => (
-              <TextInput
-              style={[styles.input, {
-                borderWidth: errors.email && 1,
-                borderColor: errors.email && '#ff375b'
-                }]}
-              placeholder="Digite seu E-mail"
-              value={value}
-              onBlur={onBlur}
-              autoCorrect={false}
-              onChangeText={onChange}
-              /> 
-            )}
-            />
-              {errors.email && <Text style={styles.labelError}>{errors.email?.message}</Text>}
+      <SubmitButton onPress={handleLogin}>
+        <SubmitText>Acessar</SubmitText>
+      </SubmitButton>
 
-            <Controller
-              control={control}
-              name="password"
-              render={({field: {onChange, onBlur, value}}) => (
-              <TextInput
-              style={[styles.input, {
-                borderWidth: errors.password && 1,
-                borderColor: errors.password && '#ff375b'
-                }]}
-              placeholder="Digite sua senha"
-              value={value}
-              onBlur={onBlur}
-              autoCorrect={false}
-              onChangeText={onChange}
-              secureTextEntry={true}
-              /> 
-            )}
-            />
-             {errors.password && <Text style={styles.labelError}>{errors.password?.message}</Text>}
+      <Link onPress={ () => navigation.navigate('CadastroAD')}>
+        <LinkText>Criar uma conta!</LinkText>
+      </Link>
 
-         
-            
-          <TouchableOpacity style={styles.btnAcessar} onPress={handleSubmit(handleSignIn)}>
-            <Text style={styles.btnTextoAcessar} >Acessar</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.btnCriar}>
-            <Text style={styles.btnTextoCriar}
-                  onPress={() => navigation.navigate('Cadastro')}>Criar conta Gratuita</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.btnCriar}>
-            <Text style={styles.btnTextoCriar}
-                  onPress={() => navigation.navigate('HomeAD')}>Ir para Home</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.btnCriar}>
-            <Text style={styles.btnTextoCriar}
-                  onPress={() => navigation.navigate('Login')}>Sou Cliente</Text>
-          </TouchableOpacity>
-        </Animated.View>
-      </KeyboardAvoidingView>
-    )
-  }
+      <Link onPress={ () => navigation.navigate('Login')}>
+        <LinkText>Sou Cliente</LinkText>
+      </Link>
 
-
-  const styles = StyleSheet.create({
-    backgound:{
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: '#191919'
-
-    
-    },
-
-    containerLogo:{
-      flex:1,
-      justifyContent:'center',
-
-    },
-    container:{
-      flex:1,
-      alignItems: 'center',
-      width:'90%',
-      paddingBottom: 50,
-
-    },
-    input:{
-      backgroundColor:'#424242',
-      width:'90%',
-      marginBottom:15,
-      color:'#222',
-      fontSize:17,
-      borderRadius: 7,
-      padding:10,
-    },
-    btnAcessar:{
-        backgroundColor: '#efbc1c',
-        width: '90%',
-        height: 45,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 7, 
-
-
-
-    },
-   btnTextoAcessar:{
-    color:'#FFF',
-    fontSize: 18,
-
-
-    },
-    btnCriar:{
-      marginTop: 10,
-
-    },
-    btnTextoCriar:{
-      color: '#FFF',
-
-    },
-    labelError:{
-      alignSelf:'flex-start',
-      color: '#ff375b',
-      marginBottom:7,
-    }
-
-
-  });
+      </Container>
+   </Background>
+  );
+}

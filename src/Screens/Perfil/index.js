@@ -1,168 +1,181 @@
-import React, {useState, useContext} from 'react';
+import React, { useState, useContext } from 'react';
 
-import {View, SafeAreaView, StyleSheet} from 'react-native';
+import { StyleSheet, Modal, Platform } from 'react-native';
 import {
-  Avatar,
   Title,
   Caption,
-  Text,
   TouchableRipple,
-  
+
 } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import Feather from 'react-native-vector-icons/Feather';
+
+import firebase from '../../services/firebaseConnection';
+
+import {
+  Container,
+  UserInfo,
+  Row,
+  Text,
+  ContainerInfoBox,
+  InfoBox,
+  ContainerMenu,
+  MenuItem,
+  MenuText,
+  Button,
+  ButtonText,
+  Input,
+  ModalContainer,
+  ButtonBack
+
+} from './styles'
 
 
-import {AuthContext} from '../../contexts/auth'
-
-const Perfil = (props) => {
+import { AuthContext } from '../../contexts/auth'
 
 
-  const {user, deslogar} = useContext(AuthContext)
+
+function Perfil(props) {
+
+  const [open, setOpen] = useState(false);
+  const [nome, setNome] = useState(user?.nome)
+  const { user, deslogar, setUser } = useContext(AuthContext)
+
+  async function updateProfile() {
+    if (nome == '') {
+
+      return;
+
+
+    }
+    console.log(user);
+    await firebase.database().ref('users').child(user?.uid).update({
+      nome: nome
+    })
+
+    let data = {
+      uid: user.uid,
+      nome: nome,
+      email: user.email,
+    }
+
+    setUser(data)
+  }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <Container>
 
-      <View style={styles.userInfoSection}>
-        <View style={{flexDirection: 'row', marginTop: 15}}>
-          {/* <Avatar.Image 
-            source={{
-              uri: 'https://api.adorable.io/avatars/80/abott@adorable.png',
-            }}
-            size={80}
-          /> */}
-          <View style={{marginLeft: 20}}>
-            <Title style={[styles.title, {
-              marginTop:15,
-              marginBottom: 5,
-            }]}>{user && user.nome}</Title>
-            <Caption style={styles.caption}>@Usuario</Caption>
-          </View>
-        </View>
-      </View>
+      <UserInfo>
+        <Title style={[styles.title, {
+          marginTop: 50,
+          marginBottom: 5,
+        }]}>{user && user.nome}</Title>
+      </UserInfo>
 
-      <View style={styles.userInfoSection}>
-        <View style={styles.row}>
-        <MaterialCommunityIcons name="map-marker-radius" color="#efbc1c" size={20}/>
-        <Text style={{color:"#c9c7c7", marginLeft: 20}}>Cidade, Pais</Text>
-        </View>
-        <View style={styles.row}>
-        <MaterialCommunityIcons name="phone" color="#efbc1c" size={20}/>
-        <Text style={{color:"#c9c7c7", marginLeft: 20}}>+55 (00) 9000-0009</Text>
-        </View>
-        <View style={styles.row}>
-        <MaterialCommunityIcons name="email" color="#efbc1c"  size={20}/>
-          <Text style={{color:"#c9c7c7", marginLeft: 20}}>usuario@email.com</Text>
-        </View>
-      </View>
+      <UserInfo>
+        <Row>
+          <MaterialCommunityIcons name="map-marker-radius" color="#efbc1c" size={20} />
+          <Text>Cidade, Pais</Text>
+        </Row>
+        <Row>
+          <MaterialCommunityIcons name="phone" color="#efbc1c" size={20} />
+          <Text>+55 (00) 9000-0009</Text>
+        </Row>
+        <Row>
+          <MaterialCommunityIcons name="email" color="#efbc1c" size={20} />
+          <Text>{user && user.email}</Text>
+        </Row>
+      </UserInfo>
 
-      <View style={styles.infoBoxWrapper}>
-          <View style={[styles.infoBox, {
-            borderRightColor: '#292929',
-            borderRightWidth: 1
-          }]}>
-            <Caption style={[styles.duplo, { color:'#c9c7c7'}]}>Seu Plano</Caption>
-            <Title style={[styles.duplo, { color:'#c9c7c7'}]}>Premium</Title>
+      <ContainerInfoBox>
+        <InfoBox>
+          <Caption style={[styles.duplo, { color: '#c9c7c7' }]}>Seu Plano</Caption>
+          <Title style={[styles.duplo, { color: '#c9c7c7' }]}>Premium</Title>
 
-          </View>
-          <View style={styles.infoBox}>
-            <Caption style={[styles.duplo, { color:'#c9c7c7'}]}>Renovação</Caption>
-            <Title style={[styles.duplo, { color:'#c9c7c7'}]}>12/02</Title>
+        </InfoBox>
+        <InfoBox>
+          <Caption style={[styles.duplo, { color: '#c9c7c7' }]}>Renovação</Caption>
+          <Title style={[styles.duplo, { color: '#c9c7c7' }]}>12/02</Title>
+        </InfoBox>
+      </ContainerInfoBox>
 
-          </View>
-      </View>
+      <ContainerMenu>
 
-      <View style={styles.menuWrapper}>
-      <TouchableRipple onPress={() => {}}>
-          <View style={styles.menuItem}>
-          <MaterialCommunityIcons name="account-edit" color="#efbc1c" size={25}/>
-         <Text style={styles.menuItemText}>Alterar Dados</Text>
-          </View>
+        <TouchableRipple onPress={() => setOpen(true)}>
+          <MenuItem>
+            <MaterialCommunityIcons name="account-edit" color="#efbc1c" size={25} />
+            <MenuText>Alterar Dados</MenuText>
+          </MenuItem>
         </TouchableRipple>
+
         <TouchableRipple onPress={() => props.navigation.navigate('Pagamentos')}>
-          <View style={styles.menuItem}>
-          <MaterialCommunityIcons name="credit-card" color="#efbc1c" size={25}/>
-          <Text style={styles.menuItemText}>Pagamentos e Planos</Text>
-          </View>
+          <MenuItem>
+            <MaterialCommunityIcons name="credit-card" color="#efbc1c" size={25} />
+            <MenuText>Pagamentos e Planos</MenuText>
+          </MenuItem>
         </TouchableRipple>
+
         <TouchableRipple onPress={() => props.navigation.navigate('Suporte')}>
-          <View style={styles.menuItem}>
-          <MaterialCommunityIcons name="account-check-outline" color="#efbc1c" size={25}/>
-         <Text style={styles.menuItemText}>Suporte</Text>
-          </View>
+          <MenuItem>
+            <MaterialCommunityIcons name="account-check-outline" color="#efbc1c" size={25} />
+            <MenuText>Suporte</MenuText>
+          </MenuItem>
         </TouchableRipple>
-        <TouchableRipple onPress={() => {}}>
-          <View style={styles.menuItem}>
-          <MaterialCommunityIcons name="cog" color="#efbc1c" size={25}/>
-          <Text style={styles.menuItemText}>Configurações</Text>
-          </View>
+
+        <TouchableRipple onPress={() => { }}>
+          <MenuItem>
+            <MaterialCommunityIcons name="cog" color="#efbc1c" size={25} />
+            <MenuText>Configurações</MenuText>
+          </MenuItem>
         </TouchableRipple>
+
         <TouchableRipple onPress={() => deslogar()}>
-          <View style={styles.menuItem}>
-          <MaterialCommunityIcons name="exit-to-app" color="#efbc1c" size={25}/>
-          <Text style={styles.menuItemText}>Deslogar</Text>
-          </View>
+          <MenuItem>
+            <MaterialCommunityIcons name="exit-to-app" color="#efbc1c" size={25} />
+            <MenuText>Deslogar</MenuText>
+          </MenuItem>
         </TouchableRipple>
-      </View>
-    </SafeAreaView>
+      </ContainerMenu>
+
+
+
+      <Modal visible={open} animationType="slide" transparent={true}>
+
+        <ModalContainer behavior={Platform.OS === 'android' ? '' : 'padding'}>
+          <ButtonBack onPress={() => setOpen(false)}>
+            <Feather
+              name="arrow-left"
+              size={22}
+              color="#FFF"
+            />
+            <ButtonText color="#FFF">Voltar</ButtonText>
+          </ButtonBack>
+
+          <Input
+            placeholder={user?.nome}
+            value={nome}
+            onChangeText={(text) => setNome(text)}
+          />
+
+          <Button bg="#efbc1c" onPress={updateProfile}>
+            <ButtonText color="#FFF">Salvar</ButtonText>
+          </Button>
+
+
+        </ModalContainer>
+      </Modal>
+
+    </Container>
   );
 };
 
 export default Perfil;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor:'#191919'
-  },
-  userInfoSection: {
-    paddingHorizontal: 30,
-    marginBottom: 25,
-  },
+
   title: {
-    color:'#c9c7c7',
+    color: '#c9c7c7',
     fontSize: 24,
     fontWeight: 'bold',
-  },
-  caption: {
-    color:'#c9c7c7',
-    fontSize: 14,
-    lineHeight: 14,
-    fontWeight: '500',
-  },
-  row: {
-    flexDirection: 'row',
-    marginBottom: 10,
-  },
-  infoBoxWrapper: {
-    borderBottomColor: '#292929',
-    borderBottomWidth: 1,
-    borderTopColor: '#292929',
-    borderTopWidth: 1,
-    flexDirection: 'row',
-    height: 100,
-  },
-  infoBox: {
-    color:'#c9c7c',
-    width: '50%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  menuWrapper: {
-    marginTop: 10,
-  },
-  menuItem: {
-    flexDirection: 'row',
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-  },
-  menuItemText: {
-    color: '#c9c7c7',
-    marginLeft: 20,
-    fontWeight: '600',
-    fontSize: 16,
-    lineHeight: 26,
-  },
-  duplo:{
-    color:"#c9c7c"
   },
 });

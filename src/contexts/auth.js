@@ -10,6 +10,9 @@ function AuthProvider({ children }){
     const [user, setUser] = useState(null);
     const [userAD, setUserAD] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [pagina2, setPagina2] = useState(false);
+    const [dates, setDates] = useState([]);
+
 
 
     //manter logado user cliente
@@ -106,6 +109,10 @@ useEffect(()=>{
                     uid: uid,
                     nome: nome,
                     email: value.user.email,
+                    cpf: cpf,
+                    endereco: endereco,
+                    
+
                 };
                 setUser(data);
                 storageUser(data);
@@ -166,7 +173,25 @@ useEffect(()=>{
 
 
     return(
-     <AuthContext.Provider value={{ signed: !!user, user, Cadastrar, Logar, signedAD: !!userAD, userAD, CadastrarAD, LogarAD, loading, deslogar }}>
+     <AuthContext.Provider value={{ 
+        signed: !!user,
+         user,
+          Cadastrar,
+           Logar,
+            signedAD: !!userAD,
+             userAD, CadastrarAD,
+              LogarAD,
+               loading,
+               deslogar,
+               setUser,
+               setUserAD,
+               storageUser,
+               storageUserAD,
+               setPagina2,
+               pagina2,
+               dates,
+               setDates,
+                }}>
          {children}
      </AuthContext.Provider>   
     );

@@ -5,6 +5,8 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
+import FormTwo from './form_two';
+
 import {
   Background,
   Container,
@@ -15,21 +17,24 @@ import {
   SubmitText,
   Link,
   LinkText,
-} from "./styles";
+} from "./../Login/styles";
 import { AuthContext } from "../../contexts/auth";
 
+
 const schema = yup.object({
-  email: yup.string().email("Email Invalido").required("Informe seu email"),
-  password: yup
-    .string()
-    .min(6, "A senha  deve ter pelo menos 6 digitos")
-    .required("Informe sua senha"),
+    email: yup.string().email("Email Invalido").required("Informe seu email"),
+    password: yup.string().min(6, "A senha  deve ter pelo menos 6 digitos").required("Informe sua senha"),    
+    endereco: yup.string().min(6, "Escreva seu Endereço").required("Informe seu Endereço"),
+
+
 });
 
-export default function Login() {
+export default function Cadastro() {
   const navigation = useNavigation();
 
-  const { Logar } = useContext(AuthContext);
+
+  const { Cadastrar, pagina2, setPagina1, dates} = useContext(AuthContext);
+
 
   const {
     control,
@@ -39,18 +44,22 @@ export default function Login() {
     resolver: yupResolver(schema),
   });
 
-  function handleLogin(data) {
-    const { email, password } = data;
+  function handleSignUp(data) {
 
-    Logar(email, password);
-  }
+    // const { email, password, nome } = dados;
+ 
+     //Cadastrar(email, password, nome);
+     console.log(data)
+     console.log(dates)
+
+   }
 
   return (
     <Background>
       <Container behavior={Platform.OS === "ios" ? "padding" : ""} enabled>
-        <Logo source={require("../../../assets/logo.png")} />
+        {pagina2 &&
 
-        <AreaInput>
+         <AreaInput>
           <Controller
             control={control}
             name="email"
@@ -73,11 +82,30 @@ export default function Login() {
           {errors.email && (
             <Text style={styles.labelError}>{errors.email?.message}</Text>
           )}
-
-         
-        </AreaInput>
-
-        <AreaInput>
+       
+          <Controller
+            control={control}
+            name="endereco"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <Input
+                style={[
+                  {
+                    borderWidth: errors.endereco && 1,
+                    borderColor: errors.endereco && "#ff375b",
+                  },
+                ]}
+                placeholder="Digite seu Endereço com Numero"
+                value={value}
+                onBlur={onBlur}
+                autoCorrect={false}
+                onChangeText={onChange}
+              />
+            )}
+          />
+          {errors.endereco && (
+            <Text style={styles.labelError}>{errors.endereco?.message}</Text>
+          )}
+      
           <Controller
             control={control}
             name="password"
@@ -90,7 +118,7 @@ export default function Login() {
                     alignSelf: "flex-start",
                   },
                 ]}
-                placeholder="Digite sua senha"
+                placeholder="Digite sua Senha"
                 value={value}
                 onBlur={onBlur}
                 autoCorrect={false}
@@ -101,19 +129,15 @@ export default function Login() {
           {errors.password && (
             <Text style={styles.labelError}>{errors.password?.message}</Text>
           )}
-        </AreaInput>
 
-        <SubmitButton onPress={handleSubmit(handleLogin)}>
+
+           <SubmitButton onPress={handleSubmit(handleSignUp)}>
           <SubmitText>Acessar</SubmitText>
         </SubmitButton>
+        </AreaInput>
 
-        <Link onPress={() => navigation.navigate("Cadastro")}>
-          <LinkText>Criar uma conta!</LinkText>
-        </Link>
-
-        <Link onPress={() => navigation.navigate("LoginAD")}>
-          <LinkText>Sou Advogado</LinkText>
-        </Link>
+        }
+      
       </Container>
     </Background>
   );

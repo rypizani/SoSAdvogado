@@ -5,7 +5,6 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import FormTwo from './form_two';
 
 import {
   Background,
@@ -29,11 +28,11 @@ const schema = yup.object({
 
 });
 
-export default function Cadastro() {
+export default function CadastroAD() {
   const navigation = useNavigation();
 
 
-  const { Cadastrar, pagina2, setPagina1, dates} = useContext(AuthContext);
+  const { CadastrarAD, pagina2AD, setPagina1, datesAD} = useContext(AuthContext);
 
 
   const {
@@ -47,18 +46,18 @@ export default function Cadastro() {
   function handleSignUp(data) {
 
      const { email, password, endereco } = data
-     const { nascimento, cpf, nome, tell } = dates
+     const { nascimento, cpf, nome, tell } = datesAD
  
-     Cadastrar(email, password, nome, endereco, nascimento, cpf, tell);
+     CadastrarAD(email, password, nome, endereco, nascimento, cpf, tell);
      console.log(data)
-     console.log(dates)
+     console.log(datesAD)
 
    }
 
   return (
     <Background>
       <Container behavior={Platform.OS === "ios" ? "padding" : ""} enabled>
-        {pagina2 &&
+        {pagina2AD &&
 
          <AreaInput>
           <Controller

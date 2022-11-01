@@ -12,6 +12,8 @@ function AuthProvider({ children }){
     const [loading, setLoading] = useState(true);
     const [pagina2, setPagina2] = useState(false);
     const [dates, setDates] = useState([]);
+    const [datesAD, setDatesAD] = useState([]);
+    const [pagina2AD, setPagina2AD] = useState(false);
 
 
 
@@ -96,21 +98,26 @@ useEffect(()=>{
 
 
     //cadastrar  cliente
-    async function Cadastrar(email, password, nome){
+    async function Cadastrar(email, password, nome, endereco, nascimento, cpf, tell){
         await firebase.auth().createUserWithEmailAndPassword(email,password)
         .then(async(value)=>{
             let uid = value.user.uid;
-            await firebase.database().ref('users').child(uid).set({
-                saldo: 0,
-                nome: nome
+            await firebase.database().ref('user').child(uid).set({
+                nome: nome,
+                endereco: endereco,
+                nascimento: nascimento,
+                cpf: cpf,
+                tell: tell,
             })
             .then (()=>{
                 let data = {
                     uid: uid,
                     nome: nome,
-                    email: value.user.email,
-                    cpf: cpf,
+                    email: value.user.email.trim(),
                     endereco: endereco,
+                    nascimento: nascimento,
+                    cpf: cpf,
+                    tell: tell,
                     
 
                 };
@@ -126,19 +133,28 @@ useEffect(()=>{
     }
 
     //cadastrar  Advogado
-    async function CadastrarAD(email, password, nome){
+    async function CadastrarAD(email, password, nome, endereco, nascimento, cpf, tell){
         await firebase.auth().createUserWithEmailAndPassword(email,password)
         .then(async(value)=>{
             let uid = value.user.uid;
             await firebase.database().ref('usersAD').child(uid).set({
-                saldo: 0,
-                nome: nome
+                nome: nome,
+                endereco: endereco,
+                nascimento: nascimento,
+                cpf: cpf,
+                tell: tell,
             })
             .then (()=>{
+                
                 let dataAD = {
-                    uid: uid,
-                    nome: nome,
-                    email: value.user.email,
+                uid: uid,
+                nome: nome,
+                email: value.user.email,
+                endereco: endereco,
+                nascimento: nascimento,
+                cpf: cpf,
+                tell: tell,
+
                 };
                 setUserAD(dataAD);
                 storageUserAD(dataAD);
@@ -191,6 +207,10 @@ useEffect(()=>{
                pagina2,
                dates,
                setDates,
+               datesAD,
+               setDatesAD,
+               pagina2AD,
+               setPagina2AD
                 }}>
          {children}
      </AuthContext.Provider>   

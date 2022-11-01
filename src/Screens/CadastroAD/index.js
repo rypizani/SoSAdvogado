@@ -1,64 +1,181 @@
-import React, {useState, useContext} from 'react';
-import { Platform } from 'react-native';
+import React, { useState, useContext } from "react";
+import { Platform, StyleSheet, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
-import { AuthContext } from '../../contexts/auth';
+import FormTwo from './form_two';
 
-import { Background, Container, Logo, AreaInput, Input, SubmitButton, 
-SubmitText} from '../Login/styles';
+import {
+  Background,
+  Container,
+  Logo,
+  AreaInput,
+  Input,
+  SubmitButton,
+  SubmitText,
+  Link,
+  LinkText,
+} from "./../Login/styles";
+import { AuthContext } from "../../contexts/auth";
+
+
+const schema = yup.object({
+    nascimento: yup.string().min(6, "Escreva sua data de nascimento").required("Informe sua data de nascimento"),
+    cpf: yup.string().min(6, "Escreva todos os digitos do seu CPF").required("Informe seu CPF"),
+    nome: yup.string().min(3).max(161).required("É necessario Informar seu Nome"),
+    tell: yup.string().min(6, "Escreva todos os numeros do seu telefone").required("Informe seu Telefone"),
+
+});
 
 export default function CadastroAD() {
-  const [nome, setNome] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  
-  const { CadastrarAD } = useContext(AuthContext);
+  const navigation = useNavigation();
 
-  function handleSignUp(){
-    CadastrarAD (email, password, nome);
+  const [pagina1, setPagina1] = useState(true);
+
+  const { CadastrarAD, setPagina2AD, setDatesAD } = useContext(AuthContext);
+
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  function handleCadastro(data) {
+
+    setPagina2AD(true)
+    setDatesAD({...data})
+   setPagina1(false)
   }
- 
- return (
-   <Background>
-      <Container
-      behavior={Platform.OS === 'ios' ? 'padding' : ''}
-      enabled
-      >
 
-        <AreaInput>
-          <Input
-          placeholder="Nome"
-          autoCorrect={false}
-          autoCapitalize="none"
-          value={nome}
-          onChangeText={ (text) => setNome(text) }
+  return (
+    <Background>
+      <Container behavior={Platform.OS === "ios" ? "padding" : ""} enabled>
+        <Logo source={require("../../../assets/logo.png")} />
+
+        
+
+        {pagina1 ?
+
+         <AreaInput>
+
+          <Controller
+            control={control}
+            name="nome"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <Input
+                style={[
+                  {
+                    borderWidth: errors.nome && 1,
+                    borderColor: errors.nome && "#ff375b",
+                  },
+                ]}
+                placeholder="Digite seu Nome"
+                value={value}
+                onBlur={onBlur}
+                autoCorrect={false}
+                onChangeText={onChange}
+              />
+            )}
           />
+          {errors.nome && (
+            <Text style={styles.labelError}>{errors.nome?.message}</Text>
+          )}
+
+        <Controller
+            control={control}
+            name="tell"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <Input
+                style={[
+                  {
+                    borderWidth: errors.tell && 1,
+                    borderColor: errors.tell && "#ff375b",
+                  },
+                ]}
+                placeholder="Digite seu telefone"
+                value={value}
+                onBlur={onBlur}
+                autoCorrect={false}
+                onChangeText={onChange}
+              />
+            )}
+          />
+          {errors.tell && (
+            <Text style={styles.labelError}>{errors.tell?.message}</Text>
+          )}
+       
+          
+          <Controller
+            control={control}
+            name="cpf"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <Input
+                style={[
+                  {
+                    borderWidth: errors.cpf && 1,
+                    borderColor: errors.cpf && "#ff375b",
+                  },
+                ]}
+                placeholder="Digite seu CPF"
+                value={value}
+                onBlur={onBlur}
+                autoCorrect={false}
+                onChangeText={onChange}
+              />
+            )}
+          />
+          {errors.cpf && (
+            <Text style={styles.labelError}>{errors.cpf?.message}</Text>
+          )}
+       
+         
+      
+          <Controller
+            control={control}
+            name="nascimento"
+            render={({ field: { onChange, onBlur, value } }) => (
+              <Input
+                style={[
+                  {
+                    borderWidth: errors.nascimento && 1,
+                    borderColor: errors.nascimento && "#ff375b",
+                    alignSelf: "flex-start",
+                  },
+                ]}
+                placeholder="Digite sua data de nascimento"
+                value={value}
+                onBlur={onBlur}
+                autoCorrect={false}
+                onChangeText={onChange}
+              />
+            )}
+          />
+          {errors.nascimento && (
+            <Text style={styles.labelError}>{errors.nascimento?.message}</Text>
+          )}
+
+
+           <SubmitButton onPress={handleSubmit(handleCadastro)}>
+          <SubmitText>Acessar</SubmitText>
+        </SubmitButton>
         </AreaInput>
 
-        <AreaInput>
-          <Input
-          placeholder="Email"
-          autoCorrect={false}
-          autoCapitalize="none"
-          value={email}
-          onChangeText={ (text) => setEmail(text) }
-          />
-        </AreaInput>
-
-        <AreaInput>
-          <Input
-          placeholder="Senha"
-          autoCorrect={false}
-          autoCapitalize="none"
-          value={password}
-          onChangeText={ (text) => setPassword(text) }
-          />
-        </AreaInput>
-
-      <SubmitButton onPress={handleSignUp}>
-        <SubmitText>Cadastrar</SubmitText>
-      </SubmitButton>
-
+        : <FormTwo/> }
+      
       </Container>
-   </Background>
+    </Background>
   );
 }
+
+const styles = StyleSheet.create({
+  labelError: {
+    alignSelf: "flex-start",
+    color: "#ff375b",
+    marginBottom: 7,
+  },
+});

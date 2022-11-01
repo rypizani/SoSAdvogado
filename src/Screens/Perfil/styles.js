@@ -86,23 +86,26 @@ export const ButtonText = styled.Text`
   color: ${props => props.color};
 `;
 export const Input = styled.TextInput`
-  background-color: #DDD;
+  background-color: #121212;
   width: 90%;
   border-radius: 4px;
   padding: 10px;
+  margin-top: 15px;
   font-size: 18px;
-  color: #121212;
+  color: #FFF;
   text-align: center;
+  margin-bottom: 15px;
 `;
 
 export const ModalContainer = styled.KeyboardAvoidingView`
 width: 100%;
-height: 70%;
+height: 95%;
 background-color: #191919;
 position: absolute;
 bottom: 0;
 align-items: center;
 justify-content: center;
+flex-direction: column;
 `;
 
 export const ButtonBack = styled.TouchableOpacity`
@@ -111,6 +114,17 @@ export const ButtonBack = styled.TouchableOpacity`
   left: 25px;
   flex-direction: row;
   align-items: center;
+`;
+
+export const ModalText = styled.Text`
+
+    color: #c9c7c7;
+    margin-left: 20px;
+    font-weight: 800px;
+    font-size: 20px;
+    line-height: 26px;
+
+    
 `;
 
 

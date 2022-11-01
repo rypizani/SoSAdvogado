@@ -1,150 +1,228 @@
-import { useContext } from 'react';
-import {View, SafeAreaView, StyleSheet} from 'react-native';
+import React, { useState, useContext } from "react";
+
+import { StyleSheet, Modal, Platform } from "react-native";
+import { Title, Caption, TouchableRipple } from "react-native-paper";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Feather from "react-native-vector-icons/Feather";
+
+import firebase from "../../services/firebaseConnection";
+
 import {
-  Avatar,
-  Title,
-  Caption,
+  Container,
+  UserInfo,
+  Row,
   Text,
-  TouchableRipple,
+  ContainerInfoBox,
+  InfoBox,
+  ContainerMenu,
+  MenuItem,
+  MenuText,
+  Button,
+  ButtonText,
+  Input,
+  ModalContainer,
+  ButtonBack,
+  ModalText,
+} from "../Perfil/styles";
+
+import { AuthContext } from "../../contexts/auth";
+
+function PerfilAD(props) {
+  const [open, setOpen] = useState(false);
+  const [nome, setNome] = useState(userAD?.nome);
   
-} from 'react-native-paper';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+  const [nascimento, setNascimento] = useState(userAD?.nascimento);
 
-import {AuthContext} from '../../contexts/auth'
+  const [tell, setTell] = useState(userAD?.tell);
 
+  const [endereco, setEndereco] = useState(userAD?.endereco);
 
-const PerfilAD = (props) => {
+  const { userAD, deslogar, setUserAD } = useContext(AuthContext);
 
-  const {userAD, deslogar} = useContext (AuthContext)
+  async function updateProfile() {
+    if (nome == "") {
+      return;
+    }
+    console.log(userAD);
+    await firebase.database().ref("usersAD").child(userAD?.uid).update({
+      nome: nome,
+      nascimento: nascimento,
+      tell: tell,
+      endereco: endereco,
+    });
+
+    let data = {
+      uid: userAD.uid,
+      nome: nome,
+      email: userAD.email,
+      nascimento: nascimento,
+      tell: tell,
+      cpf: userAD.cpf,
+      endereco: endereco,
+    };
+
+    setUserAD(data);
+    console.log(data)
+  }
 
   return (
-    <SafeAreaView style={styles.container}>
-
-      <View style={styles.userInfoSection}>
-        <View style={{flexDirection: 'row', marginTop: 15}}>
-          {/* <Avatar.Image 
-            source={{
-              uri: 'https://api.adorable.io/avatars/80/abott@adorable.png',
-            }}
-            size={80}
-          /> */}
-          <View style={{marginLeft: 20}}>
-            <Title style={[styles.title, {
-              marginTop:15,
+    <Container>
+      <UserInfo>
+        <Title
+          style={[
+            styles.title,
+            {
+              marginTop: 50,
               marginBottom: 5,
-            }]}>{userAD && userAD.nome}</Title>
-            <Caption style={styles.caption}>@Usuario</Caption>
-          </View>
-        </View>
-      </View>
+            },
+          ]}
+        >
+          {userAD && userAD.nome}
+        </Title>
+      </UserInfo>
 
-      <View style={styles.userInfoSection}>
-        <View style={styles.row}>
-        <MaterialCommunityIcons name="map-marker-radius" color="#efbc1c" size={20}/>
-        <Text style={{color:"#c9c7c7", marginLeft: 20}}>Cidade, Pais</Text>
-        </View>
-        <View style={styles.row}>
-        <MaterialCommunityIcons name="phone" color="#efbc1c" size={20}/>
-        <Text style={{color:"#c9c7c7", marginLeft: 20}}>+55 (00) 9000-0009</Text>
-        </View>
-        <View style={styles.row}>
-        <MaterialCommunityIcons name="email" color="#efbc1c"  size={20}/>
-          <Text style={{color:"#c9c7c7", marginLeft: 20}}>usuario@email.com</Text>
-        </View>
-      </View>
+      <UserInfo>
+        <Row>
+          <MaterialCommunityIcons
+            name="map-marker-radius"
+            color="#efbc1c"
+            size={20}
+          />
+          <Text>{userAD && userAD.endereco}</Text>
+        </Row>
+        <Row>
+          <MaterialCommunityIcons name="phone" color="#efbc1c" size={20} />
+          <Text>{userAD && userAD.tell}</Text>
+        </Row>
+        <Row>
+          <MaterialCommunityIcons name="email" color="#efbc1c" size={20} />
+          <Text>{userAD && userAD.email}</Text>
+        </Row>
 
-      <View style={styles.menuWrapper}>
-      <TouchableRipple onPress={() => {}}>
-          <View style={styles.menuItem}>
-          <MaterialCommunityIcons name="account-edit" color="#efbc1c" size={25}/>
-         <Text style={styles.menuItemText}>Alterar Dados</Text>
-          </View>
+        <Row>
+          <MaterialCommunityIcons
+            name="card-account-details-outline"
+            color="#efbc1c"
+            size={20}
+          />
+          <Text>{userAD && userAD.cpf}</Text>
+        </Row>
+        <Row>
+          <MaterialCommunityIcons
+            name="calendar-account"
+            color="#efbc1c"
+            size={20}
+          />
+          <Text>{userAD && userAD.nascimento}</Text>
+        </Row>
+      </UserInfo>
+
+      
+
+      <ContainerMenu>
+        <TouchableRipple onPress={() => setOpen(true)}>
+          <MenuItem>
+            <MaterialCommunityIcons
+              name="account-edit"
+              color="#efbc1c"
+              size={25}
+            />
+            <MenuText>Alterar Dados</MenuText>
+          </MenuItem>
         </TouchableRipple>
-        <TouchableRipple onPress={() => alert('Dados Bancarios')}>
-          <View style={styles.menuItem}>
-          <MaterialCommunityIcons name="credit-card" color="#efbc1c" size={25}/>
-          <Text style={styles.menuItemText}>Dados Bancarios</Text>
-          </View>
+
+        <TouchableRipple
+          onPress={() => props.navigation.navigate("Pagamentos")}
+        >
+          <MenuItem>
+            <MaterialCommunityIcons
+              name="credit-card"
+              color="#efbc1c"
+              size={25}
+            />
+            <MenuText>Pagamentos e Planos</MenuText>
+          </MenuItem>
         </TouchableRipple>
-        <TouchableRipple onPress={() => props.navigation.navigate('Suporte')}>
-          <View style={styles.menuItem}>
-          <MaterialCommunityIcons name="account-check-outline" color="#efbc1c" size={25}/>
-         <Text style={styles.menuItemText}>Suporte</Text>
-          </View> 
+
+        <TouchableRipple onPress={() => props.navigation.navigate("Suporte")}>
+          <MenuItem>
+            <MaterialCommunityIcons
+              name="account-check-outline"
+              color="#efbc1c"
+              size={25}
+            />
+            <MenuText>Suporte</MenuText>
+          </MenuItem>
         </TouchableRipple>
+
         <TouchableRipple onPress={() => {}}>
-          <View style={styles.menuItem}>
-          <MaterialCommunityIcons name="cog" color="#efbc1c" size={25}/>
-          <Text style={styles.menuItemText}>Configurações</Text>
-          </View>
+          <MenuItem>
+            <MaterialCommunityIcons name="cog" color="#efbc1c" size={25} />
+            <MenuText>Configurações</MenuText>
+          </MenuItem>
         </TouchableRipple>
+
         <TouchableRipple onPress={() => deslogar()}>
-          <View style={styles.menuItem}>
-          <MaterialCommunityIcons name="exit-to-app" color="#efbc1c" size={25}/>
-          <Text style={styles.menuItemText}>Deslogar</Text>
-          </View>
+          <MenuItem>
+            <MaterialCommunityIcons
+              name="exit-to-app"
+              color="#efbc1c"
+              size={25}
+            />
+            <MenuText>Deslogar</MenuText>
+          </MenuItem>
         </TouchableRipple>
-      </View>
-    </SafeAreaView>
+      </ContainerMenu>
+
+      <Modal visible={open} animationType="slide" transparent={true}>
+        <ModalContainer behavior={Platform.OS === "android" ? "" : "padding"}>
+          <ButtonBack onPress={() => setOpen(false)}>
+            <Feather name="arrow-left" size={22} color="#FFF" />
+            <ButtonText color="#FFF">Voltar</ButtonText>
+          </ButtonBack>
+          <ModalText>Nome:</ModalText>
+          <Input
+            placeholder={userAD?.nome}
+            value={nome}
+            onChangeText={(text) => setNome(text)}
+          />
+          <ModalText>Data de Nascimento:</ModalText>
+          <Input
+            placeholder={userAD?.nascimento}
+            value={nascimento}
+            onChangeText={(text) => setNascimento(text)}
+          />
+          <ModalText>Número de Telefone:</ModalText>
+
+          <Input
+            placeholder={userAD?.tell}
+            value={tell}
+            onChangeText={(text) => setTell(text)}
+          />
+
+          <ModalText>Endereço com Número:</ModalText>
+
+          <Input
+            placeholder={userAD?.endereco}
+            value={endereco}
+            onChangeText={(text) => setEndereco(text)}
+          />
+
+          <Button bg="#efbc1c" onPress={updateProfile}>
+            <ButtonText color="#FFF">Salvar</ButtonText>
+          </Button>
+        </ModalContainer>
+      </Modal>
+    </Container>
   );
-};
+}
 
 export default PerfilAD;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor:'#191919'
-  },
-  userInfoSection: {
-    paddingHorizontal: 30,
-    marginBottom: 25,
-  },
   title: {
-    color:'#c9c7c7',
+    color: "#c9c7c7",
     fontSize: 24,
-    fontWeight: 'bold',
-  },
-  caption: {
-    color:'#c9c7c7',
-    fontSize: 14,
-    lineHeight: 14,
-    fontWeight: '500',
-  },
-  row: {
-    flexDirection: 'row',
-    marginBottom: 10,
-  },
-  infoBoxWrapper: {
-    borderBottomColor: '#292929',
-    borderBottomWidth: 1,
-    borderTopColor: '#292929',
-    borderTopWidth: 1,
-    flexDirection: 'row',
-    height: 100,
-  },
-  infoBox: {
-    color:'#c9c7c',
-    width: '50%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  menuWrapper: {
-    marginTop: 10,
-  },
-  menuItem: {
-    flexDirection: 'row',
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-  },
-  menuItemText: {
-    color: '#c9c7c7',
-    marginLeft: 20,
-    fontWeight: '600',
-    fontSize: 16,
-    lineHeight: 26,
-  },
-  duplo:{
-    color:"#c9c7c"
+    fontWeight: "bold",
   },
 });

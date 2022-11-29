@@ -1745,6 +1745,16 @@
     humps "^2.0.1"
     prop-types "^15.7.2"
 
+"@freakycoder/react-native-bounceable@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@freakycoder/react-native-bounceable/-/react-native-bounceable-1.0.3.tgz#79de6fa99fb8357a5e52cc095ecdb1786f4b1514"
+  integrity sha512-+iMq2tnqxCwFjitbPUz9nZ+VfJ8OU9waIlDJAAsoq1229QEwCmERCNy5zVtDsz75q3i4FLXX/n7fimdMzmP21A==
+
+"@freakycoder/react-native-multiple-select@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@freakycoder/react-native-multiple-select/-/react-native-multiple-select-0.3.0.tgz#b0d261396ba1a2bbdb6c6f405b1720e8e293c09b"
+  integrity sha512-SbLiTKkuUkQeEvdJiOlcJvieU0/V1OO9bnGpFhVMkjg6KhVqu7U/cV96fJIEAUXl0EjQst0igVDniQu2zZ8a3Q==
+
 "@gar/promisify@^1.0.1":
   version "1.1.3"
   resolved "https://registry.npmjs.org/@gar/promisify/-/promisify-1.1.3.tgz"
@@ -8259,6 +8269,16 @@ react-is@^16.13.0, react-is@^16.13.1, react-is@^16.7.0:
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
+react-native-animated-spinkit@^1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/react-native-animated-spinkit/-/react-native-animated-spinkit-1.5.2.tgz#b1c00ecbadf48634273e6a843f8dfbcb7c006186"
+  integrity sha512-YCQGR3HzEQvyaAnepiyf/hv88Sta3UIZ2CFZPtFqwu+VbFJfMgjJZniOx4157TuR5AAYajEJP9Fgy+JLIU3jzQ==
+
+react-native-bouncy-checkbox@^3.0.6:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/react-native-bouncy-checkbox/-/react-native-bouncy-checkbox-3.0.6.tgz#c9e98d1f3aefca56cce7f06f169eb9088b6e8f6f"
+  integrity sha512-m6YXu1gKyqDpNp8LAktsaK3Y9DH6JFSuhk4xfUO2bTtIq5RfCqXVr8spXl2DVWGKRQUrtxEsh2ID6R+VBKTltQ==
+
 react-native-codegen@^0.69.2:
   version "0.69.2"
   resolved "https://registry.npmjs.org/react-native-codegen/-/react-native-codegen-0.69.2.tgz"
@@ -8315,6 +8335,13 @@ react-native-mask-text@^0.13.1:
   integrity sha512-XyCZ6c4n164MWn20XnJzkBMKyKzyaeN19JAyg62dEnielx9VeUNw4vDYyDTUunw8elY1JKtn49PWjjXVPQYJhQ==
   dependencies:
     bignumber.js "^9.0.1"
+
+react-native-modest-checkbox@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-modest-checkbox/-/react-native-modest-checkbox-3.3.0.tgz#b83d05258c0f2e08f5be85a8f804432910d953d5"
+  integrity sha512-bTf6N76LYEgvOl1erKxVbbfHVqaSfyY9/JXwnokKUSGiTw+37yiPWwMK5+qM7J3YX+N1rrWrC5UZUVEJzTR8Qg==
+  dependencies:
+    prop-types "^15.7.2"
 
 react-native-paper@^4.12.4:
   version "4.12.4"

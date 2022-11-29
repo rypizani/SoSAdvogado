@@ -5,6 +5,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
+import FormTwo from './form_two';
 
 import {
   Background,
@@ -18,22 +19,23 @@ import {
   LinkText,
 } from "./../Login/styles";
 import { AuthContext } from "../../contexts/auth";
+import FormTree from "./form_tree"
 
 
 const schema = yup.object({
     email: yup.string().email("Email Invalido").required("Informe seu email"),
     password: yup.string().min(6, "A senha  deve ter pelo menos 6 digitos").required("Informe sua senha"),    
-    endereco: yup.string().min(6, "Escreva seu Endereço").required("Informe seu Endereço"),
+    tell: yup.string().min(6, "Escreva todos os numeros do seu telefone").required("Informe seu Telefone"),
 
 
 });
 
-export default function CadastroAD() {
+export default function Cadastro() {
+
   const navigation = useNavigation();
 
 
-  const { CadastrarAD, pagina2AD, setPagina1, datesAD} = useContext(AuthContext);
-
+  const { pagina2, setPagina2, setDuoAD,} = useContext(AuthContext);
 
   const {
     control,
@@ -44,20 +46,20 @@ export default function CadastroAD() {
   });
 
   function handleSignUp(data) {
-
-     const { email, password, endereco } = data
-     const { nascimento, cpf, nome, tell } = datesAD
- 
-     CadastrarAD(email, password, nome, endereco, nascimento, cpf, tell);
-     console.log(data)
-     console.log(datesAD)
+    setPagina2(false)
+    setDuoAD({...data})
+    
+     //const { email, password, endereco } = duo
+     //const { nascimento, cpf, nome, tell } = dates
+    // Cadastrar(email, password, nome, endereco, nascimento, cpf, tell);
+   //  console.log(dates)
 
    }
 
   return (
     <Background>
       <Container behavior={Platform.OS === "ios" ? "padding" : ""} enabled>
-        {pagina2AD &&
+        {pagina2 ?
 
          <AreaInput>
           <Controller
@@ -83,18 +85,18 @@ export default function CadastroAD() {
             <Text style={styles.labelError}>{errors.email?.message}</Text>
           )}
        
-          <Controller
+       <Controller
             control={control}
-            name="endereco"
+            name="tell"
             render={({ field: { onChange, onBlur, value } }) => (
               <Input
                 style={[
                   {
-                    borderWidth: errors.endereco && 1,
-                    borderColor: errors.endereco && "#ff375b",
+                    borderWidth: errors.tell && 1,
+                    borderColor: errors.tell && "#ff375b",
                   },
                 ]}
-                placeholder="Digite seu Endereço com Numero"
+                placeholder="Digite seu telefone"
                 value={value}
                 onBlur={onBlur}
                 autoCorrect={false}
@@ -102,8 +104,8 @@ export default function CadastroAD() {
               />
             )}
           />
-          {errors.endereco && (
-            <Text style={styles.labelError}>{errors.endereco?.message}</Text>
+          {errors.tell && (
+            <Text style={styles.labelError}>{errors.tell?.message}</Text>
           )}
       
           <Controller
@@ -130,13 +132,13 @@ export default function CadastroAD() {
             <Text style={styles.labelError}>{errors.password?.message}</Text>
           )}
 
-
-           <SubmitButton onPress={handleSubmit(handleSignUp)}>
-          <SubmitText>Acessar</SubmitText>
+<SubmitButton onPress={handleSubmit(handleSignUp)}>
+          <SubmitText>Proximo</SubmitText>
         </SubmitButton>
+
         </AreaInput>
 
-        }
+        :<FormTree/>}
       
       </Container>
     </Background>

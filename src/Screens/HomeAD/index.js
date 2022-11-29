@@ -16,7 +16,7 @@ const App = () => {
   const circleCircumference = 2 * Math.PI * radius;
 
   const recusa = 25;
-  const aceito = 25;
+  const aceito = 30;
   const concluido = 50;
   const total = recusa + aceito + concluido;
 

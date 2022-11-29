@@ -11,9 +11,15 @@ function AuthProvider({ children }){
     const [userAD, setUserAD] = useState(null);
     const [loading, setLoading] = useState(true);
     const [pagina2, setPagina2] = useState(false);
+
     const [dates, setDates] = useState([]);
+
+    const [duoAD, setDuoAD] = useState([]);
+
     const [datesAD, setDatesAD] = useState([]);
     const [pagina2AD, setPagina2AD] = useState(false);
+    const [pagina3AD, setPagina3AD] = useState(false);
+
 
 
 
@@ -98,13 +104,12 @@ useEffect(()=>{
 
 
     //cadastrar  cliente
-    async function Cadastrar(email, password, nome, endereco, nascimento, cpf, tell){
+    async function Cadastrar(email, password, nome, nascimento, cpf, tell){
         await firebase.auth().createUserWithEmailAndPassword(email,password)
         .then(async(value)=>{
             let uid = value.user.uid;
             await firebase.database().ref('user').child(uid).set({
                 nome: nome,
-                endereco: endereco,
                 nascimento: nascimento,
                 cpf: cpf,
                 tell: tell,
@@ -114,7 +119,6 @@ useEffect(()=>{
                     uid: uid,
                     nome: nome,
                     email: value.user.email.trim(),
-                    endereco: endereco,
                     nascimento: nascimento,
                     cpf: cpf,
                     tell: tell,
@@ -133,13 +137,13 @@ useEffect(()=>{
     }
 
     //cadastrar  Advogado
-    async function CadastrarAD(email, password, nome, endereco, nascimento, cpf, tell){
+    async function CadastrarAD(email, password, nome, categoria, nascimento, cpf, tell){
         await firebase.auth().createUserWithEmailAndPassword(email,password)
         .then(async(value)=>{
             let uid = value.user.uid;
             await firebase.database().ref('usersAD').child(uid).set({
                 nome: nome,
-                endereco: endereco,
+                categoria: categoria,
                 nascimento: nascimento,
                 cpf: cpf,
                 tell: tell,
@@ -150,7 +154,7 @@ useEffect(()=>{
                 uid: uid,
                 nome: nome,
                 email: value.user.email,
-                endereco: endereco,
+                categoria:categoria,
                 nascimento: nascimento,
                 cpf: cpf,
                 tell: tell,
@@ -210,7 +214,11 @@ useEffect(()=>{
                datesAD,
                setDatesAD,
                pagina2AD,
-               setPagina2AD
+               setPagina2AD,
+                 pagina3AD,
+                 setPagina3AD,
+                 duoAD,
+                 setDuoAD
                 }}>
          {children}
      </AuthContext.Provider>   

@@ -24,7 +24,7 @@ import { AuthContext } from "../../contexts/auth";
 const schema = yup.object({
     email: yup.string().email("Email Invalido").required("Informe seu email"),
     password: yup.string().min(6, "A senha  deve ter pelo menos 6 digitos").required("Informe sua senha"),    
-    endereco: yup.string().min(6, "Escreva seu Endereço").required("Informe seu Endereço"),
+    tell: yup.string().min(6, "Escreva todos os numeros do seu telefone").required("Informe seu Telefone"),
 
 
 });
@@ -46,10 +46,10 @@ export default function Cadastro() {
 
   function handleSignUp(data) {
 
-     const { email, password, endereco } = data
-     const { nascimento, cpf, nome, tell } = dates
+     const { email, password, tell } = data
+     const { nascimento, cpf, nome } = dates
  
-     Cadastrar(email, password, nome, endereco, nascimento, cpf, tell);
+     Cadastrar(email, password, nome, nascimento, cpf, tell);
      console.log(data)
      console.log(dates)
 
@@ -84,18 +84,18 @@ export default function Cadastro() {
             <Text style={styles.labelError}>{errors.email?.message}</Text>
           )}
        
-          <Controller
+       <Controller
             control={control}
-            name="endereco"
+            name="tell"
             render={({ field: { onChange, onBlur, value } }) => (
               <Input
                 style={[
                   {
-                    borderWidth: errors.endereco && 1,
-                    borderColor: errors.endereco && "#ff375b",
+                    borderWidth: errors.tell && 1,
+                    borderColor: errors.tell && "#ff375b",
                   },
                 ]}
-                placeholder="Digite seu Endereço com Numero"
+                placeholder="Digite seu telefone"
                 value={value}
                 onBlur={onBlur}
                 autoCorrect={false}
@@ -103,8 +103,8 @@ export default function Cadastro() {
               />
             )}
           />
-          {errors.endereco && (
-            <Text style={styles.labelError}>{errors.endereco?.message}</Text>
+          {errors.tell && (
+            <Text style={styles.labelError}>{errors.tell?.message}</Text>
           )}
       
           <Controller

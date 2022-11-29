@@ -25,16 +25,14 @@ const schema = yup.object({
     nascimento: yup.string().min(6, "Escreva sua data de nascimento").required("Informe sua data de nascimento"),
     cpf: yup.string().min(6, "Escreva todos os digitos do seu CPF").required("Informe seu CPF"),
     nome: yup.string().min(3).max(161).required("É necessario Informar seu Nome"),
-    tell: yup.string().min(6, "Escreva todos os numeros do seu telefone").required("Informe seu Telefone"),
-
 });
 
-export default function CadastroAD() {
+export default function Cadastro() {
   const navigation = useNavigation();
 
   const [pagina1, setPagina1] = useState(true);
 
-  const { CadastrarAD, setPagina2AD, setDatesAD } = useContext(AuthContext);
+  const { CadastrarAD, setPagina2, pagina2, setDatesAD } = useContext(AuthContext);
 
 
   const {
@@ -47,8 +45,8 @@ export default function CadastroAD() {
 
   function handleCadastro(data) {
 
-    setPagina2AD(true)
-    setDatesAD({...data})
+  setPagina2(true)
+  setDatesAD({...data})
    setPagina1(false)
   }
 
@@ -57,8 +55,7 @@ export default function CadastroAD() {
       <Container behavior={Platform.OS === "ios" ? "padding" : ""} enabled>
         <Logo source={require("../../../assets/logo.png")} />
 
-        
-
+      
         {pagina1 ?
 
          <AreaInput>
@@ -86,28 +83,7 @@ export default function CadastroAD() {
             <Text style={styles.labelError}>{errors.nome?.message}</Text>
           )}
 
-        <Controller
-            control={control}
-            name="tell"
-            render={({ field: { onChange, onBlur, value } }) => (
-              <Input
-                style={[
-                  {
-                    borderWidth: errors.tell && 1,
-                    borderColor: errors.tell && "#ff375b",
-                  },
-                ]}
-                placeholder="Digite seu telefone"
-                value={value}
-                onBlur={onBlur}
-                autoCorrect={false}
-                onChangeText={onChange}
-              />
-            )}
-          />
-          {errors.tell && (
-            <Text style={styles.labelError}>{errors.tell?.message}</Text>
-          )}
+       
        
           
           <Controller
@@ -163,6 +139,7 @@ export default function CadastroAD() {
            <SubmitButton onPress={handleSubmit(handleCadastro)}>
           <SubmitText>Acessar</SubmitText>
         </SubmitButton>
+        
         </AreaInput>
 
         : <FormTwo/> }

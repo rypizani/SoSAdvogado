@@ -1,12 +1,44 @@
-import React from 'react'; 
+import React, {useContext, useEffect,useState} from 'react'; 
 import { SafeAreaView, View, ScrollView, StyleSheet } from 'react-native'; 
 import { Avatar, Button, Card, Title, Paragraph, TouchableRipple, Text } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import firebase from '../../services/firebaseConnection'
+import {AuthContext} from '../../contexts/auth'
 
+
+
+export default function MeusAtendimentos () { 
 
 const LeftContent = () => <MaterialCommunityIcons name="account-circle" size={24} color="black" />
 
-const App = (props) => { 
+const {userAD} = useContext(AuthContext) 
+  
+
+const [assunto, setAssunto] = useState()
+const [previa, setPrevia] = useState()
+
+
+  useEffect(()=>{
+
+    async function loadList(){
+      await firebase.database().ref('solicitacoes')
+      .ref().on('value',(snapshot)=>{
+        setAssunto([]);
+
+        snapshot.forEach((childItem)=>{
+          let list = {
+            assunto: childItem.val().assunto
+          };
+          setAssunto(oldArray => [...oldArray, list].reverse());
+
+        })
+      });
+    }
+
+    loadList();
+
+  },[])
+
   return ( 
     <SafeAreaView style={styles.container}> 
       <ScrollView> 
@@ -14,7 +46,7 @@ const App = (props) => {
           <Card>
             <Card.Title title="Rose" subtitle="São Pualo - Tatuapé" left={LeftContent} />
             <Card.Content>
-              <Title>Caso Judicial (TITULO)</Title>
+              <Title>{assunto}</Title>
               <Paragraph>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </Paragraph>
             </Card.Content>
             <Card.Actions>
@@ -73,4 +105,3 @@ const styles = StyleSheet.create({
   
 });
 
-export default App;

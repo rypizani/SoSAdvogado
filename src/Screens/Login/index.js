@@ -98,6 +98,7 @@ export default function Login() {
               />
             )}
           />
+          
           {errors.password && (
             <Text style={styles.labelError}>{errors.password?.message}</Text>
           )}

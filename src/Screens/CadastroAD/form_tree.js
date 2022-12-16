@@ -50,7 +50,7 @@ const staticData = [
   },
   {
     id: 4,
-    value: "Direito Ambiental",
+    value: "Direito Contratual",
     isChecked: false,
   },
   {

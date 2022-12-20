@@ -7,9 +7,8 @@ import {AuthContext} from '../../contexts/auth'
 
 
 
-export default function MeusAtendimentos () { 
+export default function MeusAtendimentos (props) { 
 
-const LeftContent = () => <MaterialCommunityIcons name="account-circle" size={24} color="black" />
 
 const {userAD} = useContext(AuthContext) 
   
@@ -18,36 +17,35 @@ const [assunto, setAssunto] = useState()
 const [previa, setPrevia] = useState()
 
 
-  useEffect(()=>{
+useEffect(()=>{
 
-    async function loadList(){
-      await firebase.database().ref('solicitacoes')
-      .ref().on('value',(snapshot)=>{
-        setAssunto([]);
+  async function loadList(){
+    await firebase.database().ref('solicitacoes')
+    .on('value',(snapshot)=>{
+      setAssunto([]);
 
-        snapshot.forEach((childItem)=>{
-          let list = {
-            assunto: childItem.val().assunto
-          };
-          setAssunto(oldArray => [...oldArray, list].reverse());
+      snapshot.forEach((childItem)=>{
+        let list = {
+          assunto: childItem.val().assunto
+        };
+        setAssunto(oldArray => [...oldArray, list].reverse());
+      })
+    });
+  }
 
-        })
-      });
-    }
+  loadList();
 
-    loadList();
-
-  },[])
+},[])
 
   return ( 
     <SafeAreaView style={styles.container}> 
       <ScrollView> 
         <View style={styles.container}> 
           <Card>
-            <Card.Title title="Rose" subtitle="São Pualo - Tatuapé" left={LeftContent} />
+            <Card.Title title="Rose" subtitle="São Pualo - Tatuapé"  />
             <Card.Content>
               <Title>{assunto}</Title>
-              <Paragraph>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </Paragraph>
+              <Paragraph>{userAD && userAD.categoria}</Paragraph>
             </Card.Content>
             <Card.Actions>
 
@@ -69,7 +67,7 @@ const [previa, setPrevia] = useState()
 </TouchableRipple>
 
 
-<TouchableRipple onPress={() => alert('Arquivar')}>
+<TouchableRipple onPress={() =>  console.log(assunto)}>
 <View style={styles.menuItem}>
 <MaterialCommunityIcons name="archive" color="#000" size={20}/>
 <Text style={styles.menuItemText}>Arquivar</Text>

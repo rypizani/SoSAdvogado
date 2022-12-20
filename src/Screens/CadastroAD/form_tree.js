@@ -130,6 +130,7 @@ const App = () => {
      
 
      CadastrarAD(email, password, nome, categoria, nascimento, cpf, tell, );
+
    }
 
   return (

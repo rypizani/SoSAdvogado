@@ -1,43 +1,106 @@
-import React from 'react'; 
+import React, {useContext, useEffect,useState} from 'react'; 
 import { SafeAreaView, View, ScrollView, StyleSheet } from 'react-native'; 
 import { Avatar, Button, Card, Title, Paragraph, TouchableRipple, Text } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import firebase from '../../services/firebaseConnection'
+import {AuthContext} from '../../contexts/auth'
 
 
-const LeftContent = () => <MaterialCommunityIcons name="account-circle" size={24} color="black" />
 
-const App = (props) => { 
+export default function SolicitacoeAD (props) { 
+
+
+const {userAD} = useContext(AuthContext) 
+  
+
+const [assunto, setAssunto] = useState()
+const [previa, setPrevia] = useState()
+
+
+useEffect(()=>{
+
+  async function loadList(){
+    await firebase.database().ref('solicitacoes')
+    .on('value',(snapshot)=>{
+      setAssunto([]);
+
+      snapshot.forEach((childItem)=>{
+        let list = {
+          assunto: childItem.val().assunto,
+          previa: childItem.val().previa,
+          nome: childItem.val().nome,
+
+        };
+        setAssunto(oldArray => [...oldArray, list].reverse());
+      })
+    });
+  }
+
+  loadList();
+
+},[])
+
+useEffect(()=>{
+
+  async function loadList2(){
+    await firebase.database().ref('usersAD')
+    .on('value',(snapshot)=>{
+      setPrevia([]);
+
+      snapshot.forEach((childItem)=>{
+        let list = {
+          categoria: childItem.val().categoria
+     
+
+        };
+        setPrevia(oldArray => [...oldArray, list].reverse());
+      })
+    });
+  }
+
+  loadList2();
+
+},[])
+
   return ( 
     <SafeAreaView style={styles.container}> 
       <ScrollView> 
         <View style={styles.container}> 
           <Card>
-            <Card.Title title="Cleiton" subtitle="São Paulo - Mooca" left={LeftContent} />
+            <Card.Title title="Rose" subtitle="São Pualo - Tatuapé" />
             <Card.Content>
-              <Title>Caso Criminalista (TITULO)</Title>
-              <Paragraph>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </Paragraph>
+              <Title></Title>
+              <Paragraph></Paragraph>
             </Card.Content>
-
             <Card.Actions>
-            <TouchableRipple onPress={() => props.navigation.navigate('CasoAD')}>
-          <View style={styles.menuItem}>
-          <MaterialCommunityIcons name="eye-circle" color="#000" size={20}/>
-          <Text style={styles.menuItemText}>Ver Mais</Text>
-          </View>
-        </TouchableRipple>
-        <TouchableRipple onPress={() => alert('Aceito Com Sucesso')}>
-          <View style={styles.menuItem}>
-          <MaterialCommunityIcons name="check-circle" color="#000" size={20}/>
-          <Text style={styles.menuItemText}>Aceitar</Text>
-          </View>
-        </TouchableRipple>
-        <TouchableRipple onPress={() => alert('Recusado com sucesso')}>
-          <View style={styles.menuItem}>
-          <MaterialCommunityIcons name="close-circle" color="#000" size={20}/>
-          <Text style={styles.menuItemText}>Recusar</Text>
-          </View>
-        </TouchableRipple>
-            </Card.Actions>
+
+
+
+<TouchableRipple onPress={() => props.navigation.navigate('ChatAD')}>
+<View style={styles.menuItem}>
+<MaterialCommunityIcons name="chat" color="#000" size={20}/>
+<Text style={styles.menuItemText}>Chat</Text>
+</View>
+</TouchableRipple>
+
+
+<TouchableRipple onPress={() =>  console.log(previa)}>
+<View style={styles.menuItem}>
+<MaterialCommunityIcons name="file-document" color="#000" size={20}/>
+<Text style={styles.menuItemText}>Documentos</Text>
+</View>
+</TouchableRipple>
+
+
+<TouchableRipple onPress={() =>  console.log(assunto)}>
+<View style={styles.menuItem}>
+<MaterialCommunityIcons name="archive" color="#000" size={20}/>
+<Text style={styles.menuItemText}>Arquivar</Text>
+</View>
+</TouchableRipple>
+
+
+  </Card.Actions>
           </Card>             
         </View> 
       </ScrollView> 
@@ -62,6 +125,6 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 15,
   },
+  
 });
 
-export default App;

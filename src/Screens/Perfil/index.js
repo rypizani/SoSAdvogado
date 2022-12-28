@@ -40,7 +40,7 @@ function Perfil(props) {
       return;
     }
     console.log(user);
-    await firebase.database().ref("users").child(user?.uid).update({
+    await firebase.database().ref("user").child(user?.uid).update({
       nome: nome,
       nascimento: nascimento,
       tell: tell,

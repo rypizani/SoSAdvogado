@@ -62,12 +62,19 @@ export const LinkText = styled.Text`
 export const List = styled.FlatList.attrs({
     marginHorizontal: 15
 })`
-    padding-top: 15px;
-    background-color: #FFF;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     margin-left: 8px;
     margin-right: 8px;
+    width:350px;
+    height:400px;
 
+`;
+
+export const Texto = styled.Text`
+margin-top: 5px;
+font-size: 30px;
+color: #FFF;
+font-weight: bold;
 `;
 

@@ -50,8 +50,6 @@ export default function Cadastro() {
      const { nascimento, cpf, nome } = dates
  
      Cadastrar(email, password, nome, nascimento, cpf, tell);
-     console.log(data)
-     console.log(dates)
 
    }
 

@@ -64,7 +64,7 @@ useEffect(()=>{
         await firebase.auth().signInWithEmailAndPassword(email, password)
         .then(async(value)=>{
             let uid = value.user.uid;
-            await firebase.database().ref('users').child(uid).once('value')
+            await firebase.database().ref('user').child(uid).once('value')
             .then((snapshot)=>{
                 let data ={
                     uid: uid,

@@ -4,7 +4,6 @@ import { Background, Input, SubmitButton, SubmitText} from './styles';
 import Picker from '../../components/Picker';
 import firebase  from '../../services/firebaseConnection';
 import {format} from 'date-fns';
-import { date } from 'yup';
 import { useNavigation } from '@react-navigation/native';
 import {AuthContext} from  '../../contexts/auth'
 
@@ -59,7 +58,7 @@ export default function New() {
       assunto: assunto,
       categoria: categoria,
       previa: previa,
-      date: new Date()
+      date: format(new Date(), 'dd/MM/yy')
     });
 
     Keyboard.dismiss();

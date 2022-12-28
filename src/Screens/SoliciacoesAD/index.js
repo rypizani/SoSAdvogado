@@ -4,6 +4,10 @@ import { Avatar, Button, Card, Title, Paragraph, TouchableRipple, Text } from 'r
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import firebase from '../../services/firebaseConnection'
 import {AuthContext} from '../../contexts/auth'
+import {List, Container, Background, Texto } from '../Login/styles'
+import SolicitaList from '../../components/SolicitaList';
+import { format } from 'date-fns';
+
 
 
 
@@ -17,11 +21,14 @@ const [assunto, setAssunto] = useState()
 const [previa, setPrevia] = useState()
 
 
+
+
 useEffect(()=>{
 
   async function loadList(){
     await firebase.database().ref('solicitacoes')
-    .on('value',(snapshot)=>{
+      .orderByChild('categoria').equalTo('14')
+      .limitToLast(10).on('value', (snapshot)=>{
       setAssunto([]);
 
       snapshot.forEach((childItem)=>{
@@ -29,6 +36,7 @@ useEffect(()=>{
           assunto: childItem.val().assunto,
           previa: childItem.val().previa,
           nome: childItem.val().nome,
+          categoria:1
 
         };
         setAssunto(oldArray => [...oldArray, list].reverse());
@@ -57,54 +65,22 @@ useEffect(()=>{
       })
     });
   }
-
+console.log(previa)
   loadList2();
 
 },[])
 
   return ( 
-    <SafeAreaView style={styles.container}> 
-      <ScrollView> 
-        <View style={styles.container}> 
-          <Card>
-            <Card.Title title="Rose" subtitle="São Pualo - Tatuapé" />
-            <Card.Content>
-              <Title></Title>
-              <Paragraph></Paragraph>
-            </Card.Content>
-            <Card.Actions>
-
-
-
-<TouchableRipple onPress={() => props.navigation.navigate('ChatAD')}>
-<View style={styles.menuItem}>
-<MaterialCommunityIcons name="chat" color="#000" size={20}/>
-<Text style={styles.menuItemText}>Chat</Text>
-</View>
-</TouchableRipple>
-
-
-<TouchableRipple onPress={() =>  console.log(previa)}>
-<View style={styles.menuItem}>
-<MaterialCommunityIcons name="file-document" color="#000" size={20}/>
-<Text style={styles.menuItemText}>Documentos</Text>
-</View>
-</TouchableRipple>
-
-
-<TouchableRipple onPress={() =>  console.log(assunto)}>
-<View style={styles.menuItem}>
-<MaterialCommunityIcons name="archive" color="#000" size={20}/>
-<Text style={styles.menuItemText}>Arquivar</Text>
-</View>
-</TouchableRipple>
-
-
-  </Card.Actions>
-          </Card>             
-        </View> 
-      </ScrollView> 
-    </SafeAreaView> 
+    <Background>
+      <Container>
+      <List
+      showsVerticalScrollIndicator={false}
+      data={assunto}
+      renderItem={ ({ item }) => ( <SolicitaList data={item} /> )}
+      />
+      
+      </Container>
+    </Background>
   ); 
 };
 

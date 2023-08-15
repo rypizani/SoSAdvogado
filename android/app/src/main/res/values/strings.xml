@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">sosadvogado-cliente</string>
+  <string name="app_name">sosadvogado-cliente</string>
+  <string name="expo_runtime_version">exposdk:47.0.0</string>
 </resources>

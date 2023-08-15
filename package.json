@@ -8,6 +8,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo/eas-build-job": "^1.0.38",
     "@firebase/auth": "^0.20.10",
     "@firebase/firestore": "^3.7.1",
     "@fortawesome/fontawesome-svg-core": "^6.1.2",
